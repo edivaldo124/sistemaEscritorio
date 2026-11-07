@@ -1,0 +1,16 @@
+{#- Layout das páginas públicas da MFV Advocacia.
+    Os avisos (flash) aparecem como toasts, incluídos pelo layout base. -#}
+{% extends "layouts/base.html" %}
+{% block estilos %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/publico.css') }}">
+{% endblock %}
+{% block corpo %}
+    {% block cabecalho %}{% include "components/cabecalho_publico.html" %}{% endblock %}
+    <main id="conteudo" class="conteudo-publico" tabindex="-1">
+        {% block conteudo %}{% endblock %}
+    </main>
+    {% block rodape %}{% include "components/rodape_publico.html" %}{% endblock %}
+{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/site.js') }}" defer></script>
+{% endblock %}

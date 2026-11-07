@@ -1,0 +1,20 @@
+{% extends "layouts/admin.html" %}
+{% block titulo %}Minha Conta · {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<header class="pagina-topo">
+    <div>
+        <p class="pagina-topo__kicker">Perfil Institucional · RBAC</p>
+        <h1 class="pagina-topo__titulo">{{ usuario_logado.name }}</h1>
+        <p class="pagina-topo__subtitulo">{{ usuario_logado.cargo }}</p>
+    </div>
+</header>
+<section class="grade-cartoes">
+    <article class="cartao">
+        <p class="cartao__kicker">Credencial Ativa</p>
+        <h2 class="cartao__titulo">{{ usuario_logado.name }}</h2>
+        <p class="cartao__texto">E-mail: {{ usuario_logado.email }}</p>
+        <p class="cartao__texto">Registro: {{ usuario_logado.oab or 'Secretaria / Controladoria' }}</p>
+        <p class="cartao__rodape">Papel RBAC: {{ usuario_logado.role }}</p>
+    </article>
+</section>
+{% endblock %}

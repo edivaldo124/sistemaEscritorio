@@ -1,0 +1,83 @@
+{% extends "layouts/publico.html" %}
+{% block titulo %}Contato — MFV Advocacia | Sousa, Paraíba{% endblock %}
+{% block descricao %}Fale com a MFV Advocacia: WhatsApp, telefone, e-mail, endereço e horário de atendimento em Sousa, Paraíba.{% endblock %}
+{% block conteudo %}
+{%- set telefone_link = escritorio.contatos.telefonePrincipal | replace(' ', '') | replace('(', '') | replace(')', '') | replace('-', '') -%}
+<section class="palco palco--pagina escuro" data-palco aria-labelledby="titulo-pagina">
+    <div class="palco__fundo" aria-hidden="true"></div>
+    <div class="contentor">
+        <div class="palco__cena" data-cena>
+            <div class="palco__monograma monograma" aria-hidden="true"></div>
+            <p class="rotulo">Contato</p>
+            <h1 class="palco__titulo" id="titulo-pagina"><span class="palco__linha"><span>Fale com o escritório</span></span></h1>
+            <p class="palco__sub">Escolha o canal que preferir. O atendimento por telefone e presencial é de segunda a sexta-feira.</p>
+        </div>
+    </div>
+</section>
+
+<section class="secao secao--marfim" aria-label="Canais de contato">
+    <div class="contentor">
+        <div class="contato">
+            <dl class="canais">
+                <div class="canal">
+                    <dt>WhatsApp e telefone</dt>
+                    <dd>
+                        <a href="{{ escritorio.contatos.whatsappUrl }}" target="_blank" rel="noopener noreferrer">{{ escritorio.contatos.telefonePrincipal }}</a>
+                        · <a href="tel:{{ telefone_link }}">Ligar</a>
+                    </dd>
+                </div>
+                <div class="canal">
+                    <dt>E-mail</dt>
+                    <dd>
+                        <a href="mailto:{{ escritorio.contatos.emailInstitucional }}">{{ escritorio.contatos.emailInstitucional }}</a>
+                        <br><span class="campo-ajuda">As respostas chegam em horário comercial.</span>
+                    </dd>
+                </div>
+                <div class="canal">
+                    <dt>Endereço</dt>
+                    <dd>
+                        {{ escritorio.endereco.completo }}<br>
+                        <a href="{{ escritorio.contatos.mapaUrl }}" target="_blank" rel="noopener noreferrer">Ver no mapa</a>
+                    </dd>
+                </div>
+                <div class="canal">
+                    <dt>Horário</dt>
+                    <dd>{{ escritorio.contatos.horarioAtendimento }}.</dd>
+                </div>
+                <div class="canal">
+                    <dt>Redes sociais</dt>
+                    <dd>
+                        <a href="{{ escritorio.contatos.instagramUrl }}" target="_blank" rel="noopener noreferrer">Instagram {{ escritorio.contatos.instagram }}</a>
+                        · <a href="{{ escritorio.contatos.facebookUrl }}" target="_blank" rel="noopener noreferrer">Facebook</a>
+                    </dd>
+                </div>
+            </dl>
+
+            <form class="formulario-contato escuro" method="get" action="https://api.whatsapp.com/send/" target="_blank"
+                  data-form-whatsapp data-whatsapp="{{ escritorio.contatos.whatsappUrl }}">
+                <h2>Envie uma mensagem pelo WhatsApp</h2>
+                <p>Preencha os campos e abra a conversa com o texto pronto. O que você digita não fica guardado neste site.</p>
+                <input type="hidden" name="phone" value="{{ telefone_link | replace('+', '') }}">
+                <label class="campo">
+                    <span>Seu nome</span>
+                    <input type="text" name="nome" autocomplete="name" required>
+                </label>
+                <label class="campo">
+                    <span>Assunto</span>
+                    <select name="assunto">
+                        <option value="">Prefiro explicar na mensagem</option>
+                        {% for area in areas %}
+                        <option value="{{ area.titulo }}">{{ area.titulo }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+                <label class="campo">
+                    <span>Mensagem</span>
+                    <textarea name="text" required></textarea>
+                </label>
+                <button class="botao botao--primario botao--bloco" type="submit">Abrir conversa no WhatsApp</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

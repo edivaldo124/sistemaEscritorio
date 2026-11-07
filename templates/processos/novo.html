@@ -1,0 +1,37 @@
+{% extends "layouts/admin.html" %}
+{% block titulo %}Autuar Novo Processo · {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<header class="pagina-topo">
+    <div>
+        <p class="pagina-topo__kicker">Autuação Processual · PJe</p>
+        <h1 class="pagina-topo__titulo">Novo Processo Judicial</h1>
+        <p class="pagina-topo__subtitulo">Comarca de Sousa/PB — TJPB, TRT-13 e TRF-5.</p>
+    </div>
+</header>
+<form class="formulario cartao" data-api="/api/processos" data-redirect="{{ url_for('processos.listar_processos') }}">
+    <label class="campo"><span>Numeração Única CNJ</span><input name="numeroCnj" placeholder="0000000-00.2026.8.15.0371" required></label>
+    <label class="campo"><span>Título / Objeto da Ação</span><input name="titulo" required></label>
+    <label class="campo"><span>Área do Direito</span><input name="area" value="Direito Civil, Contratos & Responsabilidade Civil" required></label>
+    <label class="campo"><span>Órgão Julgador</span><input name="orgaoJulgador" value="TJPB — Comarca de Sousa" required></label>
+    <label class="campo"><span>Vara / Juízo</span><input name="vara" value="1ª Vara Mista de Sousa" required></label>
+    <label class="campo"><span>Polo Ativo</span><input name="poloAtivo" required></label>
+    <label class="campo"><span>Polo Passivo</span><input name="poloPassivo" required></label>
+    <label class="campo">
+        <span>Cliente Vinculado</span>
+        <select name="clientId" required>
+            {% for c in clientes %}
+            <option value="{{ c.id }}">{{ c.nome }} ({{ c.documento }})</option>
+            {% endfor %}
+        </select>
+    </label>
+    <label class="campo">
+        <span>Advogado Responsável (OAB/PB)</span>
+        <select name="advogadoId" required>
+            {% for adv in advogados %}
+            <option value="{{ adv.id }}">{{ adv.name }} ({{ adv.oab or adv.role }})</option>
+            {% endfor %}
+        </select>
+    </label>
+    <button type="submit" class="botao botao--primario">Autuar Processo</button>
+</form>
+{% endblock %}

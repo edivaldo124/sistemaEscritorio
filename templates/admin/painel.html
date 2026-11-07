@@ -1,0 +1,52 @@
+{% extends "layouts/admin.html" %}
+{% block titulo %}Painel Jurídico · {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<header class="pagina-topo">
+    <div>
+        <p class="pagina-topo__kicker">Controladoria Jurídica · Sousa/PB</p>
+        <h1 class="pagina-topo__titulo">Visão Geral do Escritório</h1>
+        <p class="pagina-topo__subtitulo">{{ escritorio.razaoSocial }} · CNPJ {{ escritorio.cnpj }}</p>
+    </div>
+    <div class="acoes-linha">
+        <a class="botao" href="{{ url_for('clientes.novo_cliente') }}">+ Novo Cliente</a>
+        <a class="botao botao--primario" href="{{ url_for('processos.novo_processo') }}">+ Autuar Processo</a>
+    </div>
+</header>
+
+<section class="grade-kpis">
+    <article class="cartao-kpi">
+        <span>Clientes Cadastrados</span>
+        <strong>{{ resumo.metricas.totalClientes }}</strong>
+    </article>
+    <article class="cartao-kpi">
+        <span>Processos Ativos</span>
+        <strong>{{ resumo.metricas.processosAtivos }}</strong>
+    </article>
+    <article class="cartao-kpi">
+        <span>Prazos / Urgentes</span>
+        <strong>{{ resumo.metricas.processosUrgentes }}</strong>
+    </article>
+    <article class="cartao-kpi">
+        <span>Valor Sob Gestão</span>
+        <strong>{{ resumo.metricas.valorTotalCausas | moeda }}</strong>
+    </article>
+</section>
+
+<section class="secao-bloco">
+    <h2 class="secao-subtitulo">Processos Recentes</h2>
+    {% if resumo.processosRecentes %}
+    <div class="grade-cartoes">
+        {% for proc in resumo.processosRecentes %}
+        <article class="cartao">
+            <p class="cartao__kicker">{{ proc.numeroCnj | cnj }} · {{ proc.orgaoJulgador }}</p>
+            <h3 class="cartao__titulo"><a href="{{ url_for('processos.detalhe_processo', process_id=proc.id) }}">{{ proc.titulo }}</a></h3>
+            <p class="cartao__texto">{{ proc.poloAtivo }} × {{ proc.poloPassivo }}</p>
+            <small class="cartao__rodape">{{ proc.status | status_processo }} · {{ proc.valorCausa | moeda }}</small>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="estado-vazio">Nenhum processo cadastrado ainda. Utilize "+ Autuar Processo" para registrar demandas reais.</p>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "processos/detalhe.html" %}
+{% block subconteudo_processo %}
+<section class="secao-bloco">
+    <h2 class="secao-subtitulo">Comentários e Despachos Internos ({{ processo.mensagens | length }})</h2>
+    {% if processo.mensagens %}
+    <div class="grade-cartoes">
+        {% for msg in processo.mensagens %}
+        <article class="cartao">
+            <p class="cartao__kicker">{{ msg.autorNome }} ({{ msg.autorOab or 'Equipe' }})</p>
+            <p class="cartao__texto">{{ msg.conteudo }}</p>
+            <small class="cartao__rodape">{{ msg.createdAt | data_hora }}</small>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="estado-vazio">Nenhum despacho interno registrado para estes autos.</p>
+    {% endif %}
+</section>
+{% endblock %}

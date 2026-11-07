@@ -1,0 +1,19 @@
+{% extends "layouts/publico.html" %}
+{% block cabecalho %}{% endblock %}
+{% block rodape %}{% endblock %}
+{% block corpo_classe %}sem-cabecalho{% endblock %}
+{% block titulo %}Recuperar o acesso · {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<div class="auth-grade auth-grade--unica">
+    <section class="auth-conteudo">
+        <div class="auth-caixa">
+            <h1 class="pagina-topo__titulo">Como recuperar o acesso</h1>
+            <p class="cartao__texto">
+                O acesso é ligado aos e-mails institucionais do escritório. Para recuperar a credencial, fale com um dos sócios
+                ou escreva para <a href="mailto:{{ escritorio.contatos.emailInstitucional }}">{{ escritorio.contatos.emailInstitucional }}</a>.
+            </p>
+            <a class="botao botao--primario" href="{{ url_for('auth.pagina_login') }}">Voltar para entrar</a>
+        </div>
+    </section>
+</div>
+{% endblock %}

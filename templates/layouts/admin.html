@@ -1,0 +1,10 @@
+{#- Layout do Painel Jurídico da MFV Advocacia -#}
+{% extends "layouts/base.html" %}
+{% block corpo_classe %}admin-shell{% endblock %}
+{% block corpo %}
+    {% include "components/admin_nav.html" %}
+    <main id="conteudo" class="painel__conteudo">
+        {% include "components/mensagens.html" %}
+        {% block conteudo %}{% endblock %}
+    </main>
+{% endblock %}

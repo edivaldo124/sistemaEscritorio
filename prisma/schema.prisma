@@ -1,0 +1,140 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String          @id @default(cuid())
+  name          String
+  email         String          @unique
+  oab           String?
+  role          String          @default("ADVOGADO") // SOCIO | ADVOGADO | ASSISTENTE | CLIENTE
+  cargo         String
+  especialidade String
+  telefone      String?
+  ativo         Boolean         @default(true)
+  createdAt     DateTime        @default(now())
+  processos     LegalProcess[]
+  eventos       CalendarEvent[]
+  mensagens     InternalMessage[]
+}
+
+model Client {
+  id              String          @id @default(cuid())
+  nome            String
+  tipoPessoa      String          @default("PF") // PF | PJ
+  documento       String          @unique
+  rgOuIe          String?
+  email           String?
+  telefone        String
+  whatsapp        String?
+  endereco        String?
+  cidade          String          @default("Sousa")
+  uf              String          @default("PB")
+  cep             String          @default("58800-000")
+  profissaoOuRamo String?
+  estadoCivil     String?
+  observacoes     String?
+  status          String          @default("ATIVO") // ATIVO | PROSPECTO | ARQUIVADO
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  processos       LegalProcess[]
+  documentos      Document[]
+  eventos         CalendarEvent[]
+}
+
+model LegalProcess {
+  id              String            @id @default(cuid())
+  numeroCnj       String            @unique
+  titulo          String
+  area            String
+  orgaoJulgador   String
+  vara            String
+  comarca         String            @default("Sousa - PB")
+  poloAtivo       String
+  poloPassivo     String
+  fase            String            @default("CONHECIMENTO") // CONHECIMENTO | RECURSAL | EXECUCAO | CUMPRIMENTO_DE_SENTENCA | CONSULTIVO | ENCERRADO
+  status          String            @default("ATIVO") // ATIVO | SUSPENSO | URGENTE | ARQUIVADO | CONCLUIDO
+  prioridade      String            @default("NORMAL") // NORMAL | ALTA | CRITICA
+  valorCausa      Float             @default(0)
+  proximoPrazo    DateTime?
+  descricaoObjeto String?
+  clientId        String
+  client          Client            @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  advogadoId      String
+  advogado        User              @relation(fields: [advogadoId], references: [id])
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  movimentacoes   ProcessMovement[]
+  documentos      Document[]
+  eventos         CalendarEvent[]
+  mensagens       InternalMessage[]
+}
+
+model ProcessMovement {
+  id              String       @id @default(cuid())
+  processId       String
+  process         LegalProcess @relation(fields: [processId], references: [id], onDelete: Cascade)
+  tipo            String       @default("ANDAMENTO") // ANDAMENTO | PRAZO | AUDIENCIA | DECISAO | PETICAO | PUBLICACAO_DJE
+  titulo          String
+  descricao       String
+  dataOcorrencia  DateTime     @default(now())
+  prazoFatal      DateTime?
+  concluido       Boolean      @default(false)
+  responsavelNome String
+  createdAt       DateTime     @default(now())
+}
+
+model CalendarEvent {
+  id          String        @id @default(cuid())
+  titulo      String
+  tipo        String        @default("AUDIENCIA") // AUDIENCIA | PRAZO_FATAL | REUNIAO_CLIENTE | SESSAO_JULGAMENTO | DILIGENCIA
+  descricao   String?
+  dataInicio  DateTime
+  dataFim     DateTime?
+  local       String
+  status      String        @default("PENDENTE") // PENDENTE | CONCLUIDO | CANCELADO
+  processId   String?
+  process     LegalProcess? @relation(fields: [processId], references: [id], onDelete: SetNull)
+  clientId    String?
+  client      Client?       @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  userId      String?
+  user        User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt   DateTime      @default(now())
+}
+
+model Document {
+  id            String        @id @default(cuid())
+  titulo        String
+  categoria     String        @default("PETICAO_INICIAL") // PROCURACAO | CONTRATO_HONORARIOS | DECLARACAO | PETICAO_INICIAL | CONTESTACAO | RECURSO | PARECER_EMPRESARIAL | OUTRO
+  versao        Int           @default(1)
+  nomeArquivo   String
+  tamanhoBytes  Int           @default(0)
+  mimeType      String        @default("text/plain")
+  conteudoTexto String?
+  urlArquivo    String?
+  processId     String?
+  process       LegalProcess? @relation(fields: [processId], references: [id], onDelete: SetNull)
+  clientId      String?
+  client        Client?       @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  autorNome     String
+  createdAt     DateTime      @default(now())
+}
+
+model InternalMessage {
+  id        String        @id @default(cuid())
+  canal     String        @default("GERAL") // GERAL | SOCIETARIO | CONTENCIOSO | PROCESSO
+  conteudo  String
+  autorId   String?
+  autor     User?         @relation(fields: [autorId], references: [id], onDelete: SetNull)
+  autorNome String
+  autorOab  String?
+  processId String?
+  process   LegalProcess? @relation(fields: [processId], references: [id], onDelete: Cascade)
+  fixada    Boolean       @default(false)
+  createdAt DateTime      @default(now())
+}

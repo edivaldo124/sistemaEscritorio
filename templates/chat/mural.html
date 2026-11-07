@@ -1,0 +1,32 @@
+{% extends "layouts/admin.html" %}
+{% block titulo %}Mural & Chat Interno · {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<header class="pagina-topo">
+    <div>
+        <p class="pagina-topo__kicker">Comunicação Interna da Banca</p>
+        <h1 class="pagina-topo__titulo">Mural de Despachos & Alinhamento Processual</h1>
+    </div>
+</header>
+
+<form class="formulario cartao" data-api="/api/chat" data-redirect="{{ url_for('chat.mural') }}">
+    <input type="hidden" name="canal" value="GERAL">
+    <input type="hidden" name="autorNome" value="{{ usuario_logado.name if usuario_logado else 'Advogado Plantonista' }}">
+    <input type="hidden" name="autorOab" value="{{ (usuario_logado.oab if usuario_logado else '') or '' }}">
+    <label class="campo"><span>Novo Despacho / Comunicado</span><textarea name="conteudo" rows="3" required></textarea></label>
+    <button type="submit" class="botao botao--primario">Publicar no Mural</button>
+</form>
+
+<section class="secao-bloco">
+    <div class="grade-cartoes">
+        {% for m in mensagens %}
+        <article class="cartao">
+            <p class="cartao__kicker">#{{ m.canal }} · {{ m.autorNome }} ({{ m.autorOab or 'Equipe' }})</p>
+            <p class="cartao__texto">{{ m.conteudo }}</p>
+            <small class="cartao__rodape">{{ m.createdAt | data_hora }}</small>
+        </article>
+        {% else %}
+        <p class="estado-vazio">Nenhuma mensagem publicada no mural interno.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

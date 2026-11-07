@@ -1,0 +1,38 @@
+{% extends "layouts/publico.html" %}
+{% block cabecalho %}{% endblock %}
+{% block rodape %}{% endblock %}
+{% block corpo_classe %}sem-cabecalho{% endblock %}
+{% block titulo %}Área restrita · {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<div class="auth-grade">
+    <aside class="auth-vitrine">
+        <p class="pagina-topo__kicker">{{ escritorio.nomeFantasia }}</p>
+        <h1 class="auth-vitrine__titulo">Área restrita da equipe</h1>
+        <p class="auth-vitrine__texto">{{ escritorio.razaoSocial }}. Acesso para sócios, advogados e equipe de apoio.</p>
+        <p class="auth-vitrine__rodape">{{ escritorio.endereco.completo }}</p>
+    </aside>
+    <section class="auth-conteudo">
+        <div class="auth-caixa">
+            <h2 class="pagina-topo__titulo">Entrar</h2>
+            {% if erro %}
+            <div class="mensagem-item mensagem-item--erro" role="alert">{{ erro }}</div>
+            {% endif %}
+            <form method="post" action="{{ url_for('auth.pagina_login') }}" class="formulario">
+                <label class="campo">
+                    <span>E-mail institucional</span>
+                    <input type="email" name="email" value="{{ request.form.get('email', '') }}" autocomplete="username" required>
+                </label>
+                <label class="campo">
+                    <span>PIN ou inscrição na OAB/PB</span>
+                    <input type="password" name="pin" autocomplete="current-password" required>
+                </label>
+                <button type="submit" class="botao botao--primario">Entrar</button>
+            </form>
+            <div class="auth-atalhos">
+                <a href="{{ url_for('auth.pagina_recuperar') }}">Como recuperar o acesso</a>
+                <a href="{{ url_for('publico.inicio') }}">Voltar ao site</a>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

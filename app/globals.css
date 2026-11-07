@@ -1,0 +1,312 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Legora Editorial Law Journal Tokens (design-system.md) */
+  --color-parchment: #fefefc;
+  --color-ink: #000000;
+  --color-graphite: #0a0a0a;
+  --color-smoke: #6b6b6b;
+  --color-iron: #444444;
+  --color-verdigris-wash: #ebf5ed;
+  --color-slate-mist: #bdd4f0;
+  --color-pewter-haze: #98a7aa;
+
+  /* Typography — Font Families (design-system.md & apple-design) */
+  --font-rhymes-display: "Rhymes Display", "Cormorant Garamond", "Playfair Display", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-suisse-intl: "Suisse Int'l", "SF Pro Text", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Surfaces */
+  --surface-parchment-canvas: #fefefc;
+  --surface-sage-highlight: #ebf5ed;
+  --surface-slate-mist-panel: #bdd4f0;
+
+  /* Apple Design Skill Layout & Spacing Tokens */
+  --apple-section-gap: 80px;
+  --apple-section-gap-lg: 112px;
+  --apple-content-max-width: 1200px;
+  --apple-leading-title: 0.96;
+  --apple-leading-body: 1.5;
+
+  /* Radii (design-system.md) */
+  --radius-tags: 2px;
+  --radius-buttons: 2px;
+  --radius-cards: 8px;
+  --radius-inputs: 8px;
+
+  /* Framerate Scrollytelling Tokens */
+  --framerate-black: #0a0a0a;
+  --framerate-white: #fefefc;
+  --framerate-accent: #ebf5ed;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  background-color: var(--color-parchment);
+  color: var(--color-graphite);
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-parchment);
+  color: var(--color-graphite);
+  font-family: var(--font-suisse-intl), "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
+  overflow-x: hidden;
+}
+
+/* Editorial Typography Classes */
+.editorial-display {
+  font-family: var(--font-rhymes-display), "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.editorial-heading {
+  font-family: var(--font-rhymes-display), "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+}
+
+.editorial-kicker {
+  font-family: var(--font-suisse-intl), "Inter", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--color-smoke);
+}
+
+/* Legora Controls (design-system.md) */
+.btn-ink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--color-ink);
+  color: var(--color-parchment);
+  border: 1px solid var(--color-ink);
+  border-radius: 2px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  transition: background-color 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 150ms ease;
+}
+
+.btn-ink:hover:not(:disabled) {
+  background-color: var(--color-graphite);
+  border-color: var(--color-graphite);
+}
+
+.btn-ink:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-ghost-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: transparent;
+  color: var(--color-graphite);
+  border: 1px solid var(--color-graphite);
+  border-radius: 2px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  transition: background-color 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-ghost-outline:hover:not(:disabled) {
+  background-color: var(--color-verdigris-wash);
+}
+
+.input-editorial {
+  width: 100%;
+  background-color: var(--color-parchment);
+  color: var(--color-graphite);
+  border: 1px solid var(--color-graphite);
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  outline: none;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.input-editorial::placeholder {
+  color: var(--color-pewter-haze);
+  font-weight: 400;
+}
+
+.input-editorial:focus {
+  background-color: var(--color-verdigris-wash);
+  border-color: var(--color-ink);
+}
+
+/* Framerate Scrollytelling Hero System (framerate-scroll-video-site skill) */
+.hero-scroll-track {
+  position: relative;
+  height: 320vh;
+  height: 320svh;
+  background-color: var(--color-graphite);
+  color: var(--color-parchment);
+}
+
+.hero-sticky-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 28px clamp(20px, 4vw, 56px) 32px;
+}
+
+.headline-stack {
+  position: relative;
+  width: 100%;
+  max-width: 1120px;
+  min-height: clamp(320px, 38vw, 460px);
+}
+
+.headline-state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.headline-state.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.headline-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+.headline-line > span {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 760ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.headline-line:nth-child(2) > span {
+  transition-delay: 75ms;
+}
+
+.headline-state.is-active .headline-line > span {
+  transform: translateY(0%);
+}
+
+.headline-state.is-before .headline-line > span {
+  transform: translateY(-110%);
+}
+
+.headline-state.is-after .headline-line > span {
+  transform: translateY(110%);
+}
+
+.circle-arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-parchment);
+  text-decoration: none;
+}
+
+.circle-arrow {
+  width: 42px;
+  height: 42px;
+  border-radius: 9999px;
+  border: 1px solid rgba(254, 254, 252, 0.45);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.circle-arrow-link:hover .circle-arrow {
+  background-color: var(--color-parchment);
+  color: var(--color-ink);
+  border-color: var(--color-parchment);
+}
+
+.scroll-meter {
+  display: grid;
+  grid-template-columns: 1px minmax(0, 150px);
+  gap: 14px;
+  min-height: 96px;
+  align-items: end;
+}
+
+.scroll-meter-track {
+  position: relative;
+  width: 1px;
+  height: 96px;
+  background: rgba(254, 254, 252, 0.22);
+  overflow: hidden;
+}
+
+.scroll-meter-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 4%;
+  background: var(--color-parchment);
+  transition: height 110ms linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .headline-line > span,
+  .headline-state,
+  .scroll-meter-fill {
+    transition: none !important;
+  }
+}
+
+/* Print Styles for Official Legal Documents & Reports */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+}

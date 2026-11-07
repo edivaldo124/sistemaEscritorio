@@ -1,0 +1,29 @@
+{% extends "layouts/admin.html" %}
+{% block titulo %}{{ processo.numeroCnj | cnj }} · Detalhes do Processo{% endblock %}
+{% block conteudo %}
+<header class="pagina-topo">
+    <div>
+        <p class="pagina-topo__kicker">{{ processo.numeroCnj | cnj }}</p>
+        <h1 class="pagina-topo__titulo">{{ processo.titulo }}</h1>
+        <p class="pagina-topo__subtitulo">{{ processo.orgaoJulgador }} · {{ processo.vara }}</p>
+    </div>
+</header>
+
+<nav class="abas-processo" aria-label="Seções do processo">
+    <a href="{{ url_for('processos.detalhe_processo', process_id=processo.id) }}"{% if aba_ativa == 'detalhes' %} aria-current="page"{% endif %}>Detalhes</a>
+    <a href="{{ url_for('processos.timeline_processo', process_id=processo.id) }}"{% if aba_ativa == 'timeline' %} aria-current="page"{% endif %}>Timeline ({{ processo.movimentacoes | length }})</a>
+    <a href="{{ url_for('processos.documentos_processo', process_id=processo.id) }}"{% if aba_ativa == 'documentos' %} aria-current="page"{% endif %}>Documentos ({{ processo.documentos | length }})</a>
+    <a href="{{ url_for('processos.comentarios_processo', process_id=processo.id) }}"{% if aba_ativa == 'comentarios' %} aria-current="page"{% endif %}>Comentários ({{ processo.mensagens | length }})</a>
+</nav>
+
+{% block subconteudo_processo %}
+<section class="grade-cartoes">
+    <article class="cartao">
+        <p class="cartao__kicker">Partes Processuais</p>
+        <h2 class="cartao__titulo">{{ processo.poloAtivo }} × {{ processo.poloPassivo }}</h2>
+        <p class="cartao__texto">{{ processo.descricaoObjeto or 'Autos em tramitação regular.' }}</p>
+        <small class="cartao__rodape">{{ processo.fase | fase_processual }} · {{ processo.valorCausa | moeda }}</small>
+    </article>
+</section>
+{% endblock %}
+{% endblock %}

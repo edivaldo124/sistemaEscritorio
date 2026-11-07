@@ -1,0 +1,21 @@
+{% extends "layouts/admin.html" %}
+{% block titulo %}Banca & Equipe OAB/PB · {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<header class="pagina-topo">
+    <div>
+        <p class="pagina-topo__kicker">Quadro Societário e Equipe Jurídica</p>
+        <h1 class="pagina-topo__titulo">Advogados & Sócios da MFV Advocacia</h1>
+        <p class="pagina-topo__subtitulo">{{ escritorio.endereco.completo }}</p>
+    </div>
+</header>
+<div class="grade-cartoes">
+    {% for u in usuarios %}
+    <article class="cartao">
+        <p class="cartao__kicker">{{ u.role }} · {{ u.oab or 'Administrativo' }}</p>
+        <h2 class="cartao__titulo">{{ u.name }}</h2>
+        <p class="cartao__texto">{{ u.cargo }} — {{ u.especialidade }}</p>
+        <small class="cartao__rodape">{{ u.email }} · Processos: {{ u._count.processos }}</small>
+    </article>
+    {% endfor %}
+</div>
+{% endblock %}

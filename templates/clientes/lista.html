@@ -1,0 +1,28 @@
+{% extends "layouts/admin.html" %}
+{% block titulo %}Clientes (PF / PJ) · {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<header class="pagina-topo">
+    <div>
+        <p class="pagina-topo__kicker">Base Cadastral · Sousa/PB</p>
+        <h1 class="pagina-topo__titulo">Clientes (Pessoa Física e Jurídica)</h1>
+    </div>
+    <div class="acoes-linha">
+        <a class="botao botao--primario" href="{{ url_for('clientes.novo_cliente') }}">+ Novo Cliente</a>
+    </div>
+</header>
+
+{% if clientes %}
+<div class="grade-cartoes">
+    {% for c in clientes %}
+    <article class="cartao">
+        <p class="cartao__kicker">{{ c.tipoPessoa }} · {{ c.documento | documento }}</p>
+        <h2 class="cartao__titulo"><a href="{{ url_for('clientes.detalhe_cliente', client_id=c.id) }}">{{ c.nome }}</a></h2>
+        <p class="cartao__texto">{{ c.cidade }}/{{ c.uf }} · {{ c.telefone }}</p>
+        <small class="cartao__rodape">Processos: {{ c._count.processos }} · Status: {{ c.status }}</small>
+    </article>
+    {% endfor %}
+</div>
+{% else %}
+<p class="estado-vazio">Nenhum cliente cadastrado. Nenhum dado fictício foi pré-carregado.</p>
+{% endif %}
+{% endblock %}

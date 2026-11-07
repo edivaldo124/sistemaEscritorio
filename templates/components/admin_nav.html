@@ -1,0 +1,51 @@
+<aside class="lateral">
+    <div class="lateral__topo">
+        <a class="marca" href="{{ url_for('admin.painel') }}">
+            <span class="marca__selo">MFV</span>
+            <span class="marca__texto">
+                <strong>{{ escritorio.nomeFantasia }}</strong>
+                <small>Controladoria Jurídica · Sousa/PB</small>
+            </span>
+        </a>
+    </div>
+    <nav class="lateral__nav" aria-label="Painel Jurídico">
+        <a class="lateral__item{% if request.endpoint == 'admin.painel' %} ativo{% endif %}" href="{{ url_for('admin.painel') }}">
+            <span>◆</span><span>Visão Geral</span>
+        </a>
+        <a class="lateral__item{% if request.endpoint and 'clientes' in request.endpoint %} ativo{% endif %}" href="{{ url_for('clientes.listar_clientes') }}">
+            <span>◆</span><span>Clientes (PF / PJ)</span>
+        </a>
+        <a class="lateral__item{% if request.endpoint and 'processos' in request.endpoint %} ativo{% endif %}" href="{{ url_for('processos.listar_processos') }}">
+            <span>◆</span><span>Processos Judiciais</span>
+        </a>
+        <a class="lateral__item{% if request.endpoint and 'agenda' in request.endpoint %} ativo{% endif %}" href="{{ url_for('agenda.calendario') }}">
+            <span>◆</span><span>Agenda & Prazos</span>
+        </a>
+        <a class="lateral__item{% if request.endpoint and 'documentos' in request.endpoint %} ativo{% endif %}" href="{{ url_for('documentos.lista') }}">
+            <span>◆</span><span>Documentos & Minutas</span>
+        </a>
+        <a class="lateral__item{% if request.endpoint and 'relatorios' in request.endpoint %} ativo{% endif %}" href="{{ url_for('admin.relatorios_gerar') }}">
+            <span>◆</span><span>Relatórios Executivos</span>
+        </a>
+        <a class="lateral__item{% if request.endpoint and 'chat' in request.endpoint %} ativo{% endif %}" href="{{ url_for('chat.mural') }}">
+            <span>◆</span><span>Mural Interno</span>
+        </a>
+        <a class="lateral__item{% if request.endpoint == 'admin.funcionarios' %} ativo{% endif %}" href="{{ url_for('admin.funcionarios') }}">
+            <span>◆</span><span>Banca OAB/PB</span>
+        </a>
+        <a class="lateral__item{% if request.endpoint == 'admin.configuracao' %} ativo{% endif %}" href="{{ url_for('admin.configuracao') }}">
+            <span>◆</span><span>Configuração RBAC</span>
+        </a>
+    </nav>
+    <div class="lateral__rodape">
+        {% if usuario_logado %}
+        <a class="lateral__usuario" href="{{ url_for('auth.minha_conta') }}">
+            {{ usuario_logado.name }} ({{ usuario_logado.oab or usuario_logado.role }})
+        </a>
+        {% endif %}
+        <a class="lateral__link-site" href="{{ url_for('publico.inicio') }}">Portal Institucional</a>
+        <form method="post" action="{{ url_for('auth.logout') }}">
+            <button class="lateral__sair" type="submit">Encerrar Sessão</button>
+        </form>
+    </div>
+</aside>

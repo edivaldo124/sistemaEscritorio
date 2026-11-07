@@ -1,0 +1,19 @@
+{% extends "processos/detalhe.html" %}
+{% block subconteudo_processo %}
+<section class="secao-bloco">
+    <h2 class="secao-subtitulo">Documentos e Peças Associadas ({{ processo.documentos | length }})</h2>
+    {% if processo.documentos %}
+    <div class="grade-cartoes">
+        {% for d in processo.documentos %}
+        <article class="cartao">
+            <p class="cartao__kicker">{{ d.categoria }} · v{{ d.versao }}</p>
+            <h3 class="cartao__titulo">{{ d.titulo }}</h3>
+            <small class="cartao__rodape">{{ d.nomeArquivo }} · {{ d.autorNome }}</small>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="estado-vazio">Nenhum documento vinculado a este processo.</p>
+    {% endif %}
+</section>
+{% endblock %}

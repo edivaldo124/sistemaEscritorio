@@ -1,0 +1,28 @@
+{% extends "layouts/admin.html" %}
+{% block titulo %}Documentos & Minutas · {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<header class="pagina-topo">
+    <div>
+        <p class="pagina-topo__kicker">Acervo Digital · Versionamento Automático</p>
+        <h1 class="pagina-topo__titulo">Lista de Documentos e Minutas</h1>
+    </div>
+    <div class="acoes-linha">
+        <a class="botao botao--primario" href="{{ url_for('documentos.upload') }}">+ Upload / Gerar Minuta</a>
+    </div>
+</header>
+
+{% if documentos %}
+<div class="grade-cartoes">
+    {% for d in documentos %}
+    <article class="cartao">
+        <p class="cartao__kicker">{{ d.categoria }} · Versão v{{ d.versao }}</p>
+        <h2 class="cartao__titulo">{{ d.titulo }}</h2>
+        <p class="cartao__texto">{{ d.nomeArquivo }}</p>
+        <small class="cartao__rodape">{{ d.autorNome }} · {{ d.createdAt | data_hora }}</small>
+    </article>
+    {% endfor %}
+</div>
+{% else %}
+<p class="estado-vazio">Nenhum documento arquivado.</p>
+{% endif %}
+{% endblock %}

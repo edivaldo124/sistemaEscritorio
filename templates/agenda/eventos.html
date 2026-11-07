@@ -1,0 +1,24 @@
+{% extends "layouts/admin.html" %}
+{% block titulo %}Eventos & Tarefas · {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<header class="pagina-topo">
+    <div>
+        <p class="pagina-topo__kicker">Agenda Forense</p>
+        <h1 class="pagina-topo__titulo">Cadastro e Gestão de Eventos e Prazos</h1>
+    </div>
+</header>
+<form class="formulario cartao" data-api="/api/agenda" data-redirect="{{ url_for('agenda.calendario') }}">
+    <label class="campo"><span>Título do Compromisso</span><input name="titulo" required></label>
+    <label class="campo">
+        <span>Tipo</span>
+        <select name="tipo">
+            <option value="AUDIENCIA">Audiência</option>
+            <option value="PRAZO_FATAL">Prazo Fatal</option>
+            <option value="REUNIAO_CLIENTE">Reunião com Cliente</option>
+        </select>
+    </label>
+    <label class="campo"><span>Data e Hora</span><input type="datetime-local" name="dataInicio" required></label>
+    <label class="campo"><span>Local / Vara</span><input name="local" value="Fórum Dr. José Mariz — Comarca de Sousa/PB" required></label>
+    <button type="submit" class="botao botao--primario">Agendar Compromisso</button>
+</form>
+{% endblock %}

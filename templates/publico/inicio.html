@@ -1,0 +1,120 @@
+{% extends "layouts/publico.html" %}
+{% block titulo %}MFV Advocacia — Melo Fernandes & Vasconcelos | Sousa, Paraíba{% endblock %}
+{% block descricao %}Advocacia em Sousa, Paraíba, desde {{ escritorio.fundacao }}: assessoria jurídica a empresas e atendimento a pessoas físicas, do consultivo ao contencioso.{% endblock %}
+{% block conteudo %}
+{#- Palco 3D: monograma ao fundo, título à frente e painel de vidro com a foto da equipe.
+    A inclinação e a profundidade são calculadas por static/js/site.js; sem JavaScript a cena fica estática. -#}
+<section class="palco escuro" data-palco aria-labelledby="hero-titulo">
+    <div class="palco__fundo" aria-hidden="true"></div>
+    <div class="palco__cena" data-cena>
+        <div class="palco__monograma monograma" aria-hidden="true"></div>
+        <div data-particulas aria-hidden="true"></div>
+        <h1 class="palco__titulo" id="hero-titulo">
+            <span class="palco__linha"><span>Melo Fernandes</span></span>
+            <span class="palco__linha"><span>&amp; Vasconcelos</span></span>
+        </h1>
+        <p class="palco__sub">Advocacia em Sousa, Paraíba, desde {{ escritorio.fundacao }}.</p>
+        <div class="acoes-linha palco__acoes">
+            <a class="botao botao--primario" href="{{ escritorio.contatos.whatsappUrl }}" target="_blank" rel="noopener noreferrer">Falar pelo WhatsApp</a>
+            <a class="botao" href="{{ url_for('publico.escritorio') }}">Conhecer o escritório</a>
+        </div>
+        <div class="palco__painel" data-painel>
+            <picture>
+                <source media="(max-width: 880px)" srcset="{{ url_for('static', filename='img/hero-equipe-mobile.webp') }}">
+                <img src="{{ url_for('static', filename='img/hero-equipe-desktop.webp') }}"
+                     alt="Quatro integrantes da equipe da MFV Advocacia na sala de reuniões do escritório"
+                     width="1366" height="613" fetchpriority="high">
+            </picture>
+        </div>
+    </div>
+</section>
+
+<section class="secao escuro" aria-labelledby="afirmacao">
+    <div class="contentor">
+        <p class="afirmacao" id="afirmacao" data-palavras>Bárbara e Higor construíram a parceria desde o ensino médio e a levaram para a advocacia. Em {{ escritorio.fundacao }}, escolheram Sousa como sede do escritório.</p>
+        <p class="afirmacao__fonte">Resumo da história contada no site oficial do escritório.</p>
+    </div>
+</section>
+
+<section class="secao secao--sem-topo escuro" aria-label="O escritório em números">
+    <div class="contentor">
+        <div class="numeros">
+            <div class="numero">
+                <p class="numero__valor" data-contar="{{ anos_atuacao }}">{{ anos_atuacao }}</p>
+                <p class="numero__rotulo">anos de atuação em Sousa, contados desde {{ escritorio.fundacao }}</p>
+            </div>
+            <div class="numero">
+                <p class="numero__valor" data-contar="{{ mais_de_n_areas }}" data-sufixo="+">{{ mais_de_n_areas }}+</p>
+                <p class="numero__rotulo">áreas do Direito, segundo informa o escritório</p>
+            </div>
+            <div class="numero">
+                <p class="numero__valor">2</p>
+                <p class="numero__rotulo">sócios-fundadores</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="secao secao--marfim" aria-labelledby="atuacao">
+    <div class="contentor">
+        <div class="cabeca-secao">
+            <p class="rotulo">Atuação</p>
+            <h2 id="atuacao">Para empresas e para pessoas</h2>
+            <p>Assessoria jurídica para empresas em diferentes estágios do negócio e atendimento a pessoas físicas, do consultivo ao contencioso.</p>
+        </div>
+        <div class="grade-areas">
+            {% for area in areas %}
+            <article class="card-area{% if loop.first %} card-area--destaque escuro{% endif %}{% if loop.last %} card-area--ultima{% endif %}" data-tilt>
+                <div>
+                    <h3>{{ area.titulo }}</h3>
+                    <p>{{ area.resumo }}</p>
+                </div>
+                <a class="link-seta" href="{{ url_for('publico.areas') }}#{{ area.slug }}">Saiba mais<span class="so-leitor"> sobre {{ area.titulo }}</span></a>
+            </article>
+            {% endfor %}
+            <article class="card-area card-area--cta" data-tilt>
+                <div>
+                    <h3>Mais de {{ mais_de_n_areas }} áreas do Direito</h3>
+                    <p>Não encontrou a sua? Conte o seu caso ao escritório.</p>
+                </div>
+                <a class="link-seta" href="{{ url_for('publico.contato') }}">Falar com o escritório</a>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="secao secao--papel" aria-labelledby="onde">
+    <div class="contentor">
+        <div class="duas-colunas">
+            <div class="duas-colunas__texto">
+                <p class="rotulo">Onde estamos</p>
+                <h2 id="onde">No centro de Sousa</h2>
+                <p>{{ escritorio.endereco.completo }}.</p>
+                <p>Atendimento por telefone e presencial: {{ escritorio.contatos.horarioAtendimento | lower }}.</p>
+                <div class="acoes-linha">
+                    <a class="botao" href="{{ escritorio.contatos.mapaUrl }}" target="_blank" rel="noopener noreferrer">Ver no mapa</a>
+                    <a class="botao" href="{{ url_for('publico.contato') }}">Todos os contatos</a>
+                </div>
+            </div>
+            <div class="foto-cartao" data-tilt>
+                <img src="{{ url_for('static', filename='img/fachada-mfv.webp') }}"
+                     alt="Fachada do escritório da MFV Advocacia, com o letreiro dourado sobre revestimento de mármore escuro"
+                     width="810" height="600" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="secao escuro" aria-labelledby="chamada-final">
+    <div class="contentor">
+        <div class="encerramento">
+            <div class="encerramento__monograma monograma" aria-hidden="true"></div>
+            <h2 class="encerramento__titulo" id="chamada-final">Fale com o escritório.</h2>
+            <div class="acoes-linha">
+                <a class="botao botao--primario" href="{{ escritorio.contatos.whatsappUrl }}" target="_blank" rel="noopener noreferrer">Falar pelo WhatsApp</a>
+                <a class="botao" href="{{ url_for('publico.contato') }}">Ver outros canais</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

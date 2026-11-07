@@ -1,0 +1,19 @@
+{% extends "layouts/admin.html" %}
+{% block titulo %}Novo Cadastro · {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<header class="pagina-topo">
+    <div>
+        <p class="pagina-topo__kicker">Cadastro Oficial · Sousa/PB</p>
+        <h1 class="pagina-topo__titulo">Novo Cliente</h1>
+        <p class="pagina-topo__subtitulo">Os dados serão persistidos no banco SQLite via SQLAlchemy.</p>
+    </div>
+</header>
+<form id="form-novo-cliente" class="formulario cartao" data-api="/api/clientes" data-redirect="{{ url_for('clientes.listar_clientes') }}">
+    <label class="campo"><span>Nome Completo / Razão Social</span><input name="nome" required></label>
+    <label class="campo"><span>Tipo de Pessoa</span><select name="tipoPessoa"><option value="PF">Pessoa Física (PF)</option><option value="PJ">Pessoa Jurídica (PJ)</option></select></label>
+    <label class="campo"><span>CPF ou CNPJ</span><input name="documento" required></label>
+    <label class="campo"><span>Telefone / WhatsApp</span><input name="telefone" required></label>
+    <label class="campo"><span>Cidade</span><input name="cidade" value="Sousa"></label>
+    <button type="submit" class="botao botao--primario">Salvar Cliente</button>
+</form>
+{% endblock %}

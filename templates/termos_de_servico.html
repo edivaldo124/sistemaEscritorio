@@ -1,0 +1,61 @@
+{% extends "layouts/publico.html" %}
+{% block titulo %}Termos de uso — {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<article class="conteudo-institucional">
+    <header class="pagina-topo">
+        <div>
+            <p class="pagina-topo__kicker">Termos de uso</p>
+            <h1 class="pagina-topo__titulo">Termos de uso deste site</h1>
+            <p class="pagina-topo__subtitulo">Leia antes de usar as informações publicadas aqui.</p>
+        </div>
+    </header>
+
+    <div class="bloco-texto">
+        <section>
+            <h2>Sobre este site</h2>
+            <p>
+                Este é um projeto acadêmico de redesign da presença digital da <strong>{{ escritorio.razaoSocial }}</strong>
+                (CNPJ {{ escritorio.cnpj }}), feito a partir de informações públicas. Ele não é o site oficial do escritório.
+                O site oficial é <a href="{{ escritorio.contatos.website }}" target="_blank" rel="noopener noreferrer">mfv.adv.br</a>.
+            </p>
+        </section>
+
+        <section>
+            <h2>Conteúdo informativo</h2>
+            <p>
+                As páginas têm caráter informativo. Elas não são aconselhamento jurídico e não criam relação entre advogado e cliente.
+                Para orientação sobre um caso, fale diretamente com o escritório.
+            </p>
+        </section>
+
+        <section>
+            <h2>Publicidade na advocacia</h2>
+            <p>
+                O conteúdo foi escrito buscando seguir a sobriedade pedida pelo Código de Ética e Disciplina da OAB e pelo
+                Provimento 205/2021: sem promessa de resultado, sem valores de honorários e sem depoimentos de clientes.
+            </p>
+        </section>
+
+        <section>
+            <h2>Marca, fotos e vídeos</h2>
+            <p>
+                O logotipo, as fotografias e os vídeos pertencem ao escritório e foram reproduzidos do site oficial.
+                Não os use sem autorização do escritório.
+            </p>
+        </section>
+
+        <section>
+            <h2>Links externos</h2>
+            <p>
+                Alguns links levam a sites de terceiros, como WhatsApp, redes sociais e Google Maps. Este projeto não controla
+                o conteúdo nem a política de privacidade desses sites.
+            </p>
+        </section>
+
+        <section>
+            <h2>Dúvidas</h2>
+            <p>Escreva para <a href="mailto:{{ escritorio.contatos.emailInstitucional }}">{{ escritorio.contatos.emailInstitucional }}</a>.</p>
+        </section>
+    </div>
+</article>
+{% endblock %}

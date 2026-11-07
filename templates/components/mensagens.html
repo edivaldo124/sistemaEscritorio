@@ -1,0 +1,12 @@
+{#- Mensagens flash em linha -#}
+{%- with msgs = get_flashed_messages(with_categories=true) %}
+{%- if msgs %}
+<aside class="mensagens-bloco" aria-label="Mensagens do sistema">
+    {% for cat, msg in msgs %}
+    <div class="alerta alerta--{{ cat }}" role="alert">
+        <span>{{ msg }}</span>
+    </div>
+    {% endfor %}
+</aside>
+{%- endif %}
+{%- endwith %}

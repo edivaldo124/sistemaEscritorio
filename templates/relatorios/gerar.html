@@ -1,0 +1,20 @@
+{% extends "layouts/admin.html" %}
+{% block titulo %}Gerar Relatórios Executivos · {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<header class="pagina-topo">
+    <div>
+        <p class="pagina-topo__kicker">Inteligência Jurídica · Sousa/PB</p>
+        <h1 class="pagina-topo__titulo">Geração de Relatórios Executivos</h1>
+    </div>
+    <div class="acoes-linha">
+        <a class="botao" href="{{ url_for('admin.relatorios_historico') }}">Histórico de Relatórios</a>
+    </div>
+</header>
+
+<section class="grade-kpis">
+    <article class="cartao-kpi"><span>Total de Clientes</span><strong>{{ resumo.metricas.totalClientes }}</strong></article>
+    <article class="cartao-kpi"><span>Total de Processos</span><strong>{{ resumo.metricas.totalProcessos }}</strong></article>
+    <article class="cartao-kpi"><span>Documentos Emitidos</span><strong>{{ resumo.metricas.totalDocumentos }}</strong></article>
+    <article class="cartao-kpi"><span>Valor Total das Causas</span><strong>{{ resumo.metricas.valorTotalCausas | moeda }}</strong></article>
+</section>
+{% endblock %}

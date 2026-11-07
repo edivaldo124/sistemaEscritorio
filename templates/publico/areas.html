@@ -1,0 +1,42 @@
+{% extends "layouts/publico.html" %}
+{% block titulo %}Áreas de atuação — MFV Advocacia | Sousa, Paraíba{% endblock %}
+{% block descricao %}As áreas do Direito em destaque no site da MFV Advocacia: empresarial, trabalhista, consumidor, saúde, administrativo, civil, família e sucessões e previdenciário.{% endblock %}
+{% block conteudo %}
+<section class="palco palco--pagina escuro" data-palco aria-labelledby="titulo-pagina">
+    <div class="palco__fundo" aria-hidden="true"></div>
+    <div class="contentor">
+        <div class="palco__cena" data-cena>
+            <div class="palco__monograma monograma" aria-hidden="true"></div>
+            <p class="rotulo">Áreas de atuação</p>
+            <h1 class="palco__titulo" id="titulo-pagina"><span class="palco__linha"><span>Direito para empresas e para pessoas</span></span></h1>
+            <p class="palco__sub">O escritório informa atuar em mais de {{ mais_de_n_areas }} áreas do Direito. Estas são as oito que ele destaca em seu site.</p>
+        </div>
+    </div>
+</section>
+
+<section class="secao secao--papel">
+    <div class="contentor">
+        <div class="lista-areas">
+            {% for area in areas %}
+            <article class="area" id="{{ area.slug }}">
+                <h2 class="area__nome">{{ area.titulo }}</h2>
+                <p class="area__texto">{{ area.resumo }}</p>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="secao escuro" aria-labelledby="outra-area">
+    <div class="contentor">
+        <div class="encerramento">
+            <div class="encerramento__monograma monograma" aria-hidden="true"></div>
+            <h2 class="encerramento__titulo" id="outra-area">Não encontrou a sua área?</h2>
+            <p class="palco__sub palco__sub--fixo">A lista completa tem mais de {{ mais_de_n_areas }} áreas. Conte o seu caso ao escritório e ele orienta o melhor caminho.</p>
+            <div class="acoes-linha">
+                <a class="botao botao--primario" href="{{ url_for('publico.contato') }}">Entrar em contato</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

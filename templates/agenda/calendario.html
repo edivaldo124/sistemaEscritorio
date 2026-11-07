@@ -1,0 +1,28 @@
+{% extends "layouts/admin.html" %}
+{% block titulo %}Calendário Forense · {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<header class="pagina-topo">
+    <div>
+        <p class="pagina-topo__kicker">Pauta Judicial · Sousa/PB</p>
+        <h1 class="pagina-topo__titulo">Calendário de Audiências e Prazos Fatais</h1>
+    </div>
+    <div class="acoes-linha">
+        <a class="botao botao--primario" href="{{ url_for('agenda.eventos') }}">Gerenciar Eventos</a>
+    </div>
+</header>
+
+{% if eventos %}
+<div class="grade-cartoes">
+    {% for ev in eventos %}
+    <article class="cartao">
+        <p class="cartao__kicker">{{ ev.tipo }} · {{ ev.dataInicio | data_hora }}</p>
+        <h2 class="cartao__titulo">{{ ev.titulo }}</h2>
+        <p class="cartao__texto">{{ ev.local }}</p>
+        <small class="cartao__rodape">Status: {{ ev.status }}</small>
+    </article>
+    {% endfor %}
+</div>
+{% else %}
+<p class="estado-vazio">Nenhum evento agendado.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{#- Cabeçalho do site público: barra escura translúcida (blur), como no Apple Design.
+    A classe "cabecalho--rolado" é aplicada por static/js/site.js depois que a página rola. -#}
+<header class="cabecalho escuro" data-cabecalho>
+    <div class="contentor cabecalho__faixa">
+        <a class="cabecalho__marca" href="{{ url_for('publico.inicio') }}" aria-label="MFV Advocacia — página inicial">
+            <img src="{{ url_for('static', filename='img/logo-mfv-claro.webp') }}" alt="MFV Advocacia" width="158" height="34">
+        </a>
+        <button class="cabecalho__menu" type="button" aria-expanded="false" aria-controls="menu-principal" data-menu-botao>Menu</button>
+        <nav class="cabecalho__nav" id="menu-principal" aria-label="Principal" data-menu>
+            {% for endpoint, rotulo in navegacao_publica %}
+            <a href="{{ url_for(endpoint) }}"{% if request.endpoint == endpoint %} aria-current="page"{% endif %}>{{ rotulo }}</a>
+            {% endfor %}
+            <a class="botao cabecalho__cta" href="{{ escritorio.contatos.whatsappUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Falar pelo WhatsApp (abre em outra aba)">WhatsApp</a>
+        </nav>
+    </div>
+</header>

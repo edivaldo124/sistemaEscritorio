@@ -1,0 +1,25 @@
+{% extends "layouts/admin.html" %}
+{% block titulo %}Histórico de Relatórios · {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<header class="pagina-topo">
+    <div>
+        <p class="pagina-topo__kicker">Auditoria & Exportação</p>
+        <h1 class="pagina-topo__titulo">Histórico e Consolidação por Tribunal (Sousa/PB)</h1>
+    </div>
+    <div class="acoes-linha">
+        <a class="botao botao--primario" href="{{ url_for('admin.relatorios_gerar') }}">Gerar Novo Relatório</a>
+    </div>
+</header>
+
+<section class="grade-cartoes">
+    {% for item in resumo.porOrgao %}
+    <article class="cartao">
+        <p class="cartao__kicker">Tribunal / Órgão Julgador</p>
+        <h2 class="cartao__titulo">{{ item.orgao }}</h2>
+        <p class="cartao__texto">Processos vinculados: {{ item.total }}</p>
+    </article>
+    {% else %}
+    <p class="estado-vazio">Nenhuma distribuição por tribunal registrada até o momento.</p>
+    {% endfor %}
+</section>
+{% endblock %}

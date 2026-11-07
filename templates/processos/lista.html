@@ -1,0 +1,28 @@
+{% extends "layouts/admin.html" %}
+{% block titulo %}Processos Judiciais · {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<header class="pagina-topo">
+    <div>
+        <p class="pagina-topo__kicker">Contencioso & Consultivo · Sousa/PB</p>
+        <h1 class="pagina-topo__titulo">Processos Judiciais (TJPB · TRT-13 · TRF-5)</h1>
+    </div>
+    <div class="acoes-linha">
+        <a class="botao botao--primario" href="{{ url_for('processos.novo_processo') }}">+ Autuar Processo</a>
+    </div>
+</header>
+
+{% if processos %}
+<div class="grade-cartoes">
+    {% for p in processos %}
+    <article class="cartao">
+        <p class="cartao__kicker">{{ p.numeroCnj | cnj }} · {{ p.orgaoJulgador }}</p>
+        <h2 class="cartao__titulo"><a href="{{ url_for('processos.detalhe_processo', process_id=p.id) }}">{{ p.titulo }}</a></h2>
+        <p class="cartao__texto">{{ p.poloAtivo }} × {{ p.poloPassivo }}</p>
+        <small class="cartao__rodape">{{ p.status | status_processo }} · {{ p.valorCausa | moeda }}</small>
+    </article>
+    {% endfor %}
+</div>
+{% else %}
+<p class="estado-vazio">Nenhum processo cadastrado. Autue um processo real para iniciar o acompanhamento.</p>
+{% endif %}
+{% endblock %}

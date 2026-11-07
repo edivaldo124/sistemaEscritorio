@@ -1,0 +1,88 @@
+{% extends "layouts/publico.html" %}
+{% block titulo %}O escritório — MFV Advocacia | Sousa, Paraíba{% endblock %}
+{% block descricao %}A história da MFV Advocacia, fundada por Bárbara de Melo Fernandes e Higor Vasconcelos de Almeida e instalada em Sousa, Paraíba, em {{ escritorio.fundacao }}.{% endblock %}
+{% block conteudo %}
+<section class="palco palco--pagina escuro" data-palco aria-labelledby="titulo-pagina">
+    <div class="palco__fundo" aria-hidden="true"></div>
+    <div class="contentor">
+        <div class="palco__cena" data-cena>
+            <div class="palco__monograma monograma" aria-hidden="true"></div>
+            <p class="rotulo">O escritório</p>
+            <h1 class="palco__titulo" id="titulo-pagina"><span class="palco__linha"><span>Um escritório de Sousa, desde {{ escritorio.fundacao }}</span></span></h1>
+            <p class="palco__sub">Há {{ anos_atuacao }} anos, a MFV Advocacia atende empresas e pessoas físicas na Paraíba.</p>
+        </div>
+    </div>
+</section>
+
+<section class="secao secao--papel" aria-labelledby="historia">
+    <div class="contentor">
+        <div class="duas-colunas">
+            <div class="duas-colunas__texto">
+                <h2 id="historia">A história do escritório</h2>
+                <p>O escritório foi fundado por Bárbara de Melo Fernandes e Higor Vasconcelos de Almeida, sócios desde a origem. A parceria dos dois vem do ensino médio e se consolidou na advocacia.</p>
+                <p>A sede fica em Sousa desde {{ escritorio.fundacao }}. A principal frente é a assessoria a empresas, em diferentes estágios do negócio. Pessoas físicas também são atendidas, tanto na orientação quanto nas ações judiciais.</p>
+            </div>
+            <figure>
+                <div class="foto-cartao" data-tilt>
+                    <img src="{{ url_for('static', filename='img/socios-mfv.webp') }}"
+                         alt="Retrato de duas pessoas da equipe da MFV Advocacia diante de uma parede de mármore iluminada"
+                         width="1600" height="1065" loading="lazy">
+                </div>
+                <figcaption class="legenda-foto">Foto da seção de história do site oficial do escritório.</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<section class="secao escuro" aria-labelledby="socios-titulo">
+    <div class="contentor">
+        <div class="cabeca-secao">
+            <p class="rotulo">Quem fundou</p>
+            <h2 id="socios-titulo">Sócios-fundadores</h2>
+        </div>
+        <div class="socios">
+            {% for socio in socios %}
+            <article class="socio">
+                <h3 class="socio__nome">{{ socio.nome }}</h3>
+                <span class="tag">{{ socio.oab }}</span>
+                <p class="socio__papel">{{ 'Sócia-fundadora' if socio.nome.startswith('Dra.') else 'Sócio-fundador' }} da MFV Advocacia</p>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="secao secao--marfim" aria-labelledby="conteudo-titulo">
+    <div class="contentor">
+        <div class="cabeca-secao">
+            <h2 id="conteudo-titulo">Eventos e conteúdo</h2>
+            <p>O escritório publica conteúdo e promove encontros. Os links abrem o site oficial.</p>
+        </div>
+        <div>
+            {% for frente in frentes %}
+            <article class="linha-evento">
+                <h3>{{ frente.titulo }}</h3>
+                <div>
+                    <p>{{ frente.texto }}</p>
+                    <a class="link-seta" href="{{ frente.url }}" target="_blank" rel="noopener noreferrer">Abrir no site oficial</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="secao escuro" aria-labelledby="parceria">
+    <div class="contentor">
+        <div class="encerramento">
+            <div class="encerramento__monograma monograma" aria-hidden="true"></div>
+            <h2 class="encerramento__titulo" id="parceria">Fale com a MFV.</h2>
+            <p class="palco__sub palco__sub--fixo">O site oficial indica como parceiro o escritório MZA — Mouzalas Azevedo.</p>
+            <div class="acoes-linha">
+                <a class="botao botao--primario" href="{{ url_for('publico.contato') }}">Falar com a MFV</a>
+                <a class="botao" href="https://mouzalasadvogados.adv.br" target="_blank" rel="noopener noreferrer">Conhecer a MZA</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,103 @@
+"""
+Conteúdo do site público da MFV Advocacia (Sousa/PB).
+
+Regra de integridade: só entra aqui o que o escritório publica em fonte oficial
+(https://mfv.adv.br) ou que é dado cadastral público. A origem de cada item está em
+conteudo.md. Não há depoimentos, resultados de causas, preços nem "diferenciais":
+o Provimento 205/2021 da OAB limita esse tipo de publicidade na advocacia.
+"""
+
+from __future__ import annotations
+
+from datetime import date
+from typing import Dict, List, Optional, Tuple
+
+ANO_FUNDACAO = 2015
+
+# O site oficial afirma "mais de 32 áreas do Direito". Número do escritório, não contagem nossa.
+MAIS_DE_N_AREAS = 32
+
+# (endpoint do blueprint público, rótulo). Usado pelo cabeçalho e pelo rodapé.
+NAVEGACAO_PUBLICA: List[Tuple[str, str]] = [
+    ("publico.inicio", "Início"),
+    ("publico.areas", "Áreas de atuação"),
+    ("publico.escritorio", "O escritório"),
+    ("publico.contato", "Contato"),
+]
+
+# Nomes das áreas: os oito que o site oficial exibe. As frases são definições neutras do que
+# cada área do Direito abrange, escritas para este projeto; não descrevem resultados do escritório.
+AREAS_DE_ATUACAO: List[Dict[str, str]] = [
+    {
+        "slug": "empresarial",
+        "titulo": "Empresarial",
+        "resumo": "Assessoria jurídica a empresas em diferentes estágios do negócio.",
+    },
+    {
+        "slug": "trabalhista",
+        "titulo": "Trabalhista",
+        "resumo": "Relações entre empregadores e trabalhadores: orientação, prevenção e defesa de direitos.",
+    },
+    {
+        "slug": "consumidor",
+        "titulo": "Consumidor",
+        "resumo": "Conflitos nas relações de consumo, envolvendo produtos e serviços.",
+    },
+    {
+        "slug": "saude",
+        "titulo": "Saúde",
+        "resumo": "Questões jurídicas que envolvem planos de saúde, tratamentos e serviços de saúde.",
+    },
+    {
+        "slug": "administrativo",
+        "titulo": "Administrativo",
+        "resumo": "Relações com a administração pública: processos, contratos e servidores.",
+    },
+    {
+        "slug": "civil",
+        "titulo": "Civil",
+        "resumo": "Contratos, responsabilidade civil, propriedade e demais relações entre pessoas.",
+    },
+    {
+        "slug": "familia-sucessoes",
+        "titulo": "Família e Sucessões",
+        "resumo": "Questões de família, como divórcio e guarda, e de sucessões, como inventário e herança.",
+    },
+    {
+        "slug": "previdenciario",
+        "titulo": "Previdenciário",
+        "resumo": "Benefícios e direitos junto à Previdência Social.",
+    },
+]
+
+# Sócios-fundadores. Nome e OAB conferidos em fontes públicas (Diário Eletrônico da OAB e DJPB).
+# Fotos individuais não são legendadas pelo escritório, então nenhuma foto é ligada a um nome.
+SOCIOS_PUBLICOS: List[Dict[str, str]] = [
+    {"nome": "Dra. Bárbara de Melo Fernandes Vasconcelos", "oab": "OAB/PB 19.571"},
+    {"nome": "Dr. Higor Vasconcelos de Almeida", "oab": "OAB/PB 19.503"},
+]
+
+# Eventos e conteúdo que o site oficial anuncia. Sem datas: o escritório não publica agenda.
+FRENTES_DE_CONTEUDO: List[Dict[str, str]] = [
+    {
+        "titulo": "Palestras e workshops",
+        "texto": "O escritório promove encontros voltados ao público empresarial.",
+        "url": "https://mfv.adv.br/#eventos",
+    },
+    {
+        "titulo": "Blog",
+        "texto": "Notícias publicadas pelo escritório no site oficial.",
+        "url": "https://mfv.adv.br/blog/",
+    },
+    {
+        "titulo": "MFV Cast",
+        "texto": "Podcast do escritório.",
+        "url": "https://mfv.adv.br/mfv-cast/",
+    },
+]
+
+
+def anos_de_atuacao(hoje: Optional[date] = None) -> int:
+    """Anos completos desde a instalação do escritório em Sousa (2015)."""
+    referencia = hoje or date.today()
+    return referencia.year - ANO_FUNDACAO

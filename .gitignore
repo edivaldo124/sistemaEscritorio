@@ -1,0 +1,86 @@
+# =============================================================
+# Dependências
+# =============================================================
+node_modules/
+.venv/
+venv/
+
+# =============================================================
+# Python (backend Flask)
+# =============================================================
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# =============================================================
+# Next.js / TypeScript / Jest (saídas de build e cache)
+# =============================================================
+.next/
+/out/
+.swc/
+.vercel
+*.tsbuildinfo
+coverage/
+
+# =============================================================
+# Automação de navegador e testes E2E
+# =============================================================
+test-results/
+playwright-report/
+playwright/.cache/
+.playwright-mcp/
+
+# =============================================================
+# Banco de dados local (SQLite) - contém dados reais do escritório
+# =============================================================
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+/instance/
+
+# =============================================================
+# Segredos, variáveis de ambiente e certificados
+# (.env.example continua versionado como modelo)
+# =============================================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# =============================================================
+# Ferramentas de IA e configurações locais
+# =============================================================
+graphify-out/
+.claude/settings.local.json
+
+# =============================================================
+# IDE e sistema operacional
+# =============================================================
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# =============================================================
+# Logs e arquivos temporários
+# =============================================================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tmp
+*.swp
+*~

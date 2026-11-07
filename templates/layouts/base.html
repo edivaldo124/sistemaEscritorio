@@ -1,0 +1,28 @@
+{#- Layout base — MFV Advocacia, Sousa/PB.
+    Cores, fontes e espaços vêm de static/css/tokens.css (derivado de design-system.md). -#}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fefefc">
+    <title>{% block titulo %}{{ escritorio.nomeFantasia }} | Melo Fernandes & Vasconcelos{% endblock %}</title>
+    <meta name="description" content="{% block descricao %}MFV Advocacia — Melo Fernandes & Vasconcelos Advocacia, em Sousa, Paraíba.{% endblock %}">
+    <link rel="icon" type="image/png" sizes="64x64" href="{{ url_for('static', filename='img/favicon-64.png') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/inter-latin-wght-normal.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/cormorant-garamond-latin-300-normal.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tokens.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/componentes.css') }}">
+    {% block estilos %}{% endblock %}
+    <script src="{{ url_for('static', filename='js/ativar-js.js') }}"></script>
+</head>
+<body class="{% block corpo_classe %}{% endblock %}">
+    <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+    {% block corpo %}{% endblock %}
+    {% include "components/toasts.html" %}
+    <script src="{{ url_for('static', filename='js/componentes.js') }}" defer></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

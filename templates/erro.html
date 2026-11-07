@@ -1,0 +1,17 @@
+{% extends "layouts/publico.html" %}
+{% block titulo %}{{ titulo|default('Página não encontrada') }} — {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<section class="pagina-erro">
+    <div class="contentor">
+        <div class="cartao-erro">
+            <p class="pagina-topo__kicker">Erro {{ codigo|default(404) }}</p>
+            <h1 class="pagina-cabeca__titulo">{{ titulo|default('Página não encontrada') }}</h1>
+            <p class="cartao__texto">{{ mensagem|default('O endereço pode ter mudado ou ter sido digitado errado.') }}</p>
+            <div class="acoes-linha">
+                <a class="botao botao--primario" href="{{ url_for('publico.inicio') }}">Voltar ao início</a>
+                <a class="botao" href="{{ url_for('publico.contato') }}">Falar com o escritório</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

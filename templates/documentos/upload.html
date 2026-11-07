@@ -1,0 +1,27 @@
+{% extends "layouts/admin.html" %}
+{% block titulo %}Upload e Geração de Minutas · {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<header class="pagina-topo">
+    <div>
+        <p class="pagina-topo__kicker">Minutas Oficiais · MFV Advocacia</p>
+        <h1 class="pagina-topo__titulo">Upload e Emissão de Documentos Jurídicos</h1>
+    </div>
+    <div class="acoes-linha">
+        <a class="botao" href="{{ url_for('documentos.lista') }}">Voltar aos Documentos</a>
+    </div>
+</header>
+<form class="formulario cartao" data-api="/api/documentos" data-redirect="{{ url_for('documentos.lista') }}">
+    <label class="campo"><span>Título do Documento</span><input name="titulo" required></label>
+    <label class="campo">
+        <span>Categoria</span>
+        <select name="categoria">
+            <option value="PROCURACAO">Procuração Ad Judicia</option>
+            <option value="CONTRATO_HONORARIOS">Contrato de Honorários</option>
+            <option value="PETICAO_INICIAL">Petição Inicial</option>
+        </select>
+    </label>
+    <label class="campo"><span>Nome do Arquivo</span><input name="nomeArquivo" value="minuta_mfv.txt" required></label>
+    <label class="campo"><span>Conteúdo / Texto da Peça</span><textarea name="conteudoTexto" rows="6"></textarea></label>
+    <button type="submit" class="botao botao--primario">Arquivar com Versionamento</button>
+</form>
+{% endblock %}

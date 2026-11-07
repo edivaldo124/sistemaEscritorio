@@ -1,0 +1,16 @@
+{% extends "processos/detalhe.html" %}
+{% block subconteudo_processo %}
+<section class="secao-bloco">
+    <h2 class="secao-subtitulo">Linha do Tempo de Movimentações ({{ processo.movimentacoes | length }})</h2>
+    <div class="grade-cartoes">
+        {% for m in processo.movimentacoes %}
+        <article class="cartao">
+            <p class="cartao__kicker">{{ m.tipo }} · {{ m.dataOcorrencia | data_hora }}</p>
+            <h3 class="cartao__titulo">{{ m.titulo }}</h3>
+            <p class="cartao__texto">{{ m.descricao }}</p>
+            <small class="cartao__rodape">{{ m.responsavelNome }}</small>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "layouts/publico.html" %}
+{% block titulo %}Privacidade — {{ escritorio.nomeFantasia }}{% endblock %}
+{% block conteudo %}
+<article class="conteudo-institucional">
+    <header class="pagina-topo">
+        <div>
+            <p class="pagina-topo__kicker">Privacidade e LGPD</p>
+            <h1 class="pagina-topo__titulo">Como este site trata os seus dados</h1>
+            <p class="pagina-topo__subtitulo">Resumo do que o site coleta, do que não coleta e de como falar com o escritório sobre seus dados.</p>
+        </div>
+    </header>
+
+    <div class="bloco-texto">
+        <section>
+            <h2>O que o site não faz</h2>
+            <p>
+                As páginas públicas não usam cookies de rastreamento nem ferramentas de análise de audiência. As fontes são
+                servidas por este próprio site, sem chamadas a serviços de terceiros.
+            </p>
+        </section>
+
+        <section>
+            <h2>Formulário de contato</h2>
+            <p>
+                O formulário da página de contato não envia dados a este site. Ele abre o WhatsApp com a mensagem pronta.
+                O que você escreve passa a ser tratado pelo WhatsApp e pelo escritório quando você envia a mensagem.
+            </p>
+        </section>
+
+        <section>
+            <h2>Quando você escreve ou liga para o escritório</h2>
+            <p>
+                O escritório recebe seus dados de contato para responder à sua solicitação. As informações confiadas a um
+                advogado ficam protegidas pelo sigilo profissional previsto no Estatuto da Advocacia (Lei 8.906/1994).
+            </p>
+        </section>
+
+        <section>
+            <h2>Área restrita da equipe</h2>
+            <p>
+                A área restrita é destinada à equipe do escritório. Ao entrar, o sistema grava um cookie de sessão,
+                necessário para manter o acesso aberto. Visitantes do site público não precisam usá-la.
+            </p>
+        </section>
+
+        <section>
+            <h2>Seus direitos</h2>
+            <p>
+                A Lei Geral de Proteção de Dados (Lei 13.709/2018, art. 18) garante, entre outros direitos, confirmar se há
+                tratamento de dados seus, acessar e corrigir esses dados. Para exercer esses direitos, escreva para
+                <a href="mailto:{{ escritorio.contatos.emailInstitucional }}">{{ escritorio.contatos.emailInstitucional }}</a>.
+            </p>
+        </section>
+    </div>
+</article>
+{% endblock %}

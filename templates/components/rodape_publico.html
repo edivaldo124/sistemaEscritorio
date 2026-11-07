@@ -1,0 +1,44 @@
+<footer class="rodape escuro">
+    <div class="contentor">
+        <div class="rodape__grade">
+            <div class="rodape__marca">
+                <img src="{{ url_for('static', filename='img/logo-mfv-claro.webp') }}" alt="MFV Advocacia" width="220" height="47" loading="lazy">
+                <p>{{ escritorio.razaoSocial }}</p>
+                <p>CNPJ {{ escritorio.cnpj }}</p>
+            </div>
+            <nav aria-label="Rodapé">
+                <h2>Páginas</h2>
+                <ul>
+                    {% for endpoint, rotulo in navegacao_publica %}
+                    <li><a href="{{ url_for(endpoint) }}">{{ rotulo }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+            <div>
+                <h2>Contato</h2>
+                <address>
+                    <ul>
+                        <li>{{ escritorio.endereco.completo }}</li>
+                        <li><a href="{{ escritorio.contatos.whatsappUrl }}" target="_blank" rel="noopener noreferrer">{{ escritorio.contatos.telefonePrincipal }}</a></li>
+                        <li><a href="mailto:{{ escritorio.contatos.emailInstitucional }}">{{ escritorio.contatos.emailInstitucional }}</a></li>
+                        <li>{{ escritorio.contatos.horarioAtendimento }}</li>
+                    </ul>
+                </address>
+            </div>
+            <div>
+                <h2>Mais</h2>
+                <ul>
+                    <li><a href="{{ escritorio.contatos.instagramUrl }}" target="_blank" rel="noopener noreferrer">Instagram {{ escritorio.contatos.instagram }}</a></li>
+                    <li><a href="{{ escritorio.contatos.facebookUrl }}" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                    <li><a href="{{ url_for('publico.termos') }}">Termos de uso</a></li>
+                    <li><a href="{{ url_for('publico.privacidade') }}">Privacidade</a></li>
+                    <li><a href="{{ url_for('auth.pagina_login') }}">Área restrita da equipe</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="rodape__legal">
+            <p>Projeto acadêmico de redesign, feito a partir de informações públicas. Não é o site oficial do escritório: o site oficial é <a href="{{ escritorio.contatos.website }}" target="_blank" rel="noopener noreferrer">mfv.adv.br</a>.</p>
+            <p>Marca, fotos e vídeos pertencem ao escritório. Este site informa e não promete resultados, conforme o Código de Ética e Disciplina da OAB.</p>
+        </div>
+    </div>
+</footer>
