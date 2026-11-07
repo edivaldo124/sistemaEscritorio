@@ -13,6 +13,7 @@ import tempfile
 import unittest
 from html.parser import HTMLParser
 from typing import List, Set
+from unittest import mock
 from urllib.parse import urlparse
 
 from backend.database import get_engine
@@ -60,6 +61,20 @@ class SitePublicoTestCase(unittest.TestCase):
                 for destino in ("/areas-de-atuacao", "/escritorio", "/contato"):
                     self.assertIn(f'href="{destino}"', html)
                 self.assertIn("<footer", html)
+
+    def test_modo_publico_serve_so_o_site_e_bloqueia_o_sistema_interno(self) -> None:
+        with mock.patch.dict(os.environ, {"MODO_PUBLICO": "true"}):
+            cliente = criar_aplicacao(f"sqlite:///{self.db_path}").test_client()
+        for rota in PAGINAS_PUBLICAS:
+            with self.subTest(rota=rota):
+                self.assertEqual(cliente.get(rota).status_code, 200)
+        self.assertEqual(cliente.get("/static/css/tokens.css").status_code, 200)
+        for rota in ("/api/health", "/api/clientes", "/api/usuarios", "/login", "/painel", "/clientes", "/processos"):
+            with self.subTest(rota=rota):
+                self.assertEqual(cliente.get(rota).status_code, 404)
+        resposta = cliente.get("/api/clientes", headers={"X-MFV-Role": "SOCIO"})
+        self.assertEqual(resposta.status_code, 404)
+        self.assertEqual(cliente.post("/api/auth/login", json={"email": "barbara@mfv.adv.br", "pin": "19571"}).status_code, 404)
 
     def test_quatro_paginas_de_conteudo_sao_distintas(self) -> None:
         titulos = set()

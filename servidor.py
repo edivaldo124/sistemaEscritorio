@@ -7,10 +7,11 @@ Monta a aplicação Flask completa da MFV Advocacia (Sousa - PB):
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-from flask import Flask, request
+from flask import Flask, abort, request
 
 from backend.app import create_app as _create_api_app
 from blueprints import (
@@ -79,6 +80,17 @@ def criar_aplicacao(database_url: Optional[str] = None) -> Flask:
             "usuario_logado": usuario,
             "escritorio": FIRM_DATA,
         }
+
+    # MODO_PUBLICO=true (hospedagem): só o site público e os estáticos respondem.
+    # O sistema interno e a API (/api/*, /login, /painel, /clientes...) ficam em 404
+    # enquanto a autenticação não for corrigida (auditoria.md, pendência 6).
+    if os.environ.get("MODO_PUBLICO", "").strip().lower() == "true":
+
+        @app.before_request
+        def somente_site_publico() -> None:
+            if request.endpoint == "static" or request.blueprint == publico_bp.name:
+                return None
+            abort(404)
 
     registrar_tratadores_de_erro(app)
     registrar_comandos(app)
