@@ -9,7 +9,7 @@ import uuid
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
-from sqlalchemy import Boolean, Float, ForeignKey, Integer, String, Text
+from sqlalchemy import BigInteger, Boolean, Float, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy.types import TypeDecorator
 
@@ -28,7 +28,9 @@ class PrismaDateTime(TypeDecorator):
     que armazena timestamps em milissegundos epoch (int) ou ISO-8601 (str).
     """
 
-    impl = Integer
+    # BigInteger: milissegundos desde 1970 (~1,78e12) estouram o INTEGER de 32 bits do Postgres.
+    # No SQLite o INTEGER já é de 64 bits, então o dev.db existente continua compatível.
+    impl = BigInteger
     cache_ok = True
 
     def process_bind_param(self, value: Any, dialect: Any) -> Optional[int]:

@@ -27,6 +27,13 @@ def get_database_url() -> str:
         return f"sqlite:///{resolved}"
     if env_url and env_url.startswith("sqlite:"):
         return env_url
+    if env_url and env_url.startswith(("postgres://", "postgresql://", "postgresql+psycopg://")):
+        # Render e Supabase entregam "postgres://" ou "postgresql://"; o SQLAlchemy 2 precisa do
+        # driver explícito (psycopg 3). Não há fallback para SQLite aqui: uma URL de Postgres
+        # inválida deve falhar alto, em vez de gravar num arquivo que a hospedagem apaga.
+        return env_url.replace("postgres://", "postgresql://", 1).replace(
+            "postgresql://", "postgresql+psycopg://", 1
+        )
     return f"sqlite:///{DEFAULT_SQLITE_PATH}"
 
 
