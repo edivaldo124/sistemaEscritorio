@@ -460,3 +460,43 @@ O JavaScript só escreve variáveis CSS (`--rx`, `--ry`, `--p`, `--sy`, `--l`). 
 | Hero escuro com título na faixa inferior | Título no topo e foto abaixo, em painel de vidro |
 
 Continuam valendo: serifa leve 300 nos títulos (Cormorant Garamond no lugar da Rhymes Display), Inter 450 no corpo, um único botão principal por tela, nenhum depoimento de cliente e nenhum degradê de fundo decorativo, exceto os dois brilhos radiais do palco e o ouro do logotipo.
+
+---
+
+## Extensão de 10/11/2026 — trilho cinematográfico e índice editorial
+
+> Acrescentada no segundo ciclo de refinamento pedido pelo autor ("parecido com o reel, seguindo o que está nos arquivos"). Porta o padrão dos templates Framerate (hero fixo controlado pela rolagem, manchetes que trocam, medidor 00–100, abertura) para o stack do site (Flask + CSS + JS), **sem vídeo**: [conteudo.md](conteudo.md) decidiu não usar os vídeos do escritório, então o "filme" é a foto da equipe. **Nada acima foi apagado.** Os tokens novos estão em `static/css/tokens.css`.
+
+### O momento 3D da Home passa a ser o trilho
+
+| Peça | Regra |
+|---|---|
+| Trilho (`.trilho`) | Seção de 340svh no desktop e 280svh no celular (`--altura-trilho`, `--altura-trilho-movel`). O palco fica fixo (`position: sticky`, 100svh) enquanto a rolagem avança o filme. |
+| Ato 1 (até 24% do trilho) | Título centrado à frente; a foto da equipe num painel de vidro (raio 28px, inclinado 12°) que se endireita, perde o raio e cresce até cobrir o palco. Os dois botões em pílula continuam aqui. |
+| Ato 2 (o resto) | Sobre a foto em tela cheia, três manchetes trocam em partes iguais do progresso: rótulo em microtexto dourado, título em duas linhas curtas (Cormorant Garamond 300, até 128px, entrelinha 0,92), detalhe em Inter. As linhas entram por máscara (`translateY(112%)`, 780ms, `--ease-expo`); as anteriores saem por cima. |
+| Véu (`.filme__veu`) | Degradê funcional, de baixo para cima, para o texto claro ler sobre a foto (`--veu-filme` = 0,38 de escurecimento mínimo em tela cheia), com uma faixa escura no topo sob o cabeçalho. Não é decoração. |
+| Seta em círculo (`.seta-circulo`) | Rótulo em microtexto + disco de 56px com contorno dourado que inverte no hover. Ação única do ato 2 (WhatsApp). |
+| Medidor (`.medidor`) | Linha vertical de 1px que enche em ouro + contador 00–100 no canto inferior direito. Decorativo (`aria-hidden`). |
+| Abertura (`.abertura`) | Tela cheia com o logotipo dourado e uma linha que varre; some quando as fontes e a foto estão prontas (mínimo 0,9s, máximo 2,5s). Só na primeira página da aba (sessionStorage), nunca com movimento reduzido nem sem JavaScript. |
+| Microtexto | 11px, peso 500, caixa-alta, tracking 0,12em (`--texto-micro`, `--tracking-micro`). Só no medidor, na abertura, nos rótulos das manchetes e na seta em círculo. |
+
+### Índice de áreas (Home)
+
+A grade de cartões brancos da Home saiu (era o ponto mais genérico do site, como a auditoria apontava). As oito áreas aparecem como índice editorial em duas colunas: nome em Cormorant Garamond 300 (28–40px), definição em Inter 14px, filetes de 1px, seta dourada e deslocamento de 12px no hover. Um botão de contorno fecha a seção. Cartões continuam só nas fotos (inclinação 3D), nos sócios e nos canais de contato.
+
+### Acessibilidade e movimento
+
+- Um único `h1` na Home (o nome do escritório); as manchetes são parágrafos.
+- Só o ato visível recebe foco, cliques e leitor de tela: o script troca o atributo `inert` entre os atos.
+- `prefers-reduced-motion` ou sem JavaScript: o trilho vira uma seção comum (título, foto e botões), sem abertura, sem medidor e sem manchetes. Telas com menos de 480px de altura (celular deitado) também recebem a versão parada.
+- O JavaScript continua só escrevendo variáveis CSS (`--p`, `--a1`, `--escala`, `--dx`, `--dy`, `--veu` ...) e trocando classes; a profundidade segue em CSS puro.
+- Cores: nenhum arquivo além de `tokens.css` escreve um valor de cor. As transparências usam os canais `rgba(var(--x-rgb), alfa)` declarados lá.
+
+### Regras originais que esta extensão retoma ou mantém
+
+| Regra | Nesta extensão |
+|---|---|
+| Título do hero na faixa inferior (design original) | Volta a valer no ato 2: as manchetes ficam no terço de baixo da foto |
+| Uma foto cinematográfica por página | Mantida: a mesma foto faz o painel do ato 1 e a tela cheia do ato 2 |
+| Sem degradê decorativo | Mantida: o véu é funcional (legibilidade) e os brilhos do fundo continuam os dois de 06/11 |
+| Rótulos em caixa-alta só onde carregam informação | O microtexto fica limitado às quatro peças listadas acima |

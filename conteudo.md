@@ -28,6 +28,11 @@ Tudo o que está abaixo foi conferido em **06/11/2026**. O que não foi confirma
 | Onde estamos | Rua Lafaiete Píres Ferreira, nº 35, Centro — Sousa/PB, CEP 58800-510. Atendimento por telefone e presencial: segunda a sexta-feira, das 07h30 às 12h00 e das 13h30 às 18h00. | SO; GM confirma endereço e abertura às 07h30 |
 | Foto da fachada | Letreiro dourado sobre mármore escuro | SO (`estrutura.png`, recortada) |
 | Chamada final | Fale com o escritório. | Texto do projeto |
+| Manchete 1 do trilho | **Para empresas e para pessoas.** Assessoria jurídica a empresas em diferentes estágios do negócio e atendimento a pessoas físicas, do consultivo ao contencioso. | SO (mesmas frases de "Empresas" e "Pessoas") |
+| Manchete 2 do trilho | **No centro de Sousa.** Rua Lafaiete Píres Ferreira, 35, Centro. Atendimento por telefone e presencial de segunda a sexta-feira, das 07h30 às 12h00 e das 13h30 às 18h00. | SO; GM confirma endereço e abertura |
+| Manchete 3 do trilho | **Fale com o escritório.** WhatsApp, telefone, e-mail ou uma visita ao escritório, no horário de atendimento. | Texto do projeto; os canais são os do SO |
+| Abertura (tela de carregamento) | Melo Fernandes & Vasconcelos · Sousa, Paraíba · 2015 · Rua Lafaiete Píres Ferreira, 35 · Centro · Sousa/PB | SO; CNPJ |
+| Índice de áreas | "Em que o escritório pode ajudar" e "As oito áreas que o escritório destaca em seu site. Ele informa atuar em mais de 32." | Texto do projeto; SO (oito áreas e "mais de 32") |
 
 ## Áreas de atuação (`/areas-de-atuacao`)
 

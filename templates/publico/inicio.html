@@ -2,29 +2,66 @@
 {% block titulo %}MFV Advocacia — Melo Fernandes & Vasconcelos | Sousa, Paraíba{% endblock %}
 {% block descricao %}Advocacia em Sousa, Paraíba, desde {{ escritorio.fundacao }}: assessoria jurídica a empresas e atendimento a pessoas físicas, do consultivo ao contencioso.{% endblock %}
 {% block conteudo %}
-{#- Palco 3D: monograma ao fundo, título à frente e painel de vidro com a foto da equipe.
-    A inclinação e a profundidade são calculadas por static/js/site.js; sem JavaScript a cena fica estática. -#}
-<section class="palco escuro" data-palco aria-labelledby="hero-titulo">
-    <div class="palco__fundo" aria-hidden="true"></div>
-    <div class="palco__cena" data-cena>
+{% include "components/abertura.html" %}
+
+{#- Trilho cinematográfico (padrão Framerate portado para CSS + JS, sem vídeo).
+    O trilho tem várias alturas de tela; o palco fica fixo e a rolagem avança o "filme":
+      ato 1 - o título à frente e a foto da equipe num painel de vidro, que se endireita e cresce até a tela cheia;
+      ato 2 - sobre a foto, as manchetes trocam conforme o progresso, com o medidor 00-100 no canto.
+    static/js/site.js só escreve variáveis CSS (--p, --a1, --escala...). Sem JavaScript ou com movimento
+    reduzido o trilho vira uma seção comum: título, foto e botões, nada se move. -#}
+<section class="trilho" data-trilho aria-labelledby="hero-titulo">
+    <div class="palco palco--filme escuro" data-palco>
+        <div class="palco__fundo" aria-hidden="true"></div>
         <div class="palco__monograma monograma" aria-hidden="true"></div>
-        <div data-particulas aria-hidden="true"></div>
-        <h1 class="palco__titulo" id="hero-titulo">
-            <span class="palco__linha"><span>Melo Fernandes</span></span>
-            <span class="palco__linha"><span>&amp; Vasconcelos</span></span>
-        </h1>
-        <p class="palco__sub">Advocacia em Sousa, Paraíba, desde {{ escritorio.fundacao }}.</p>
-        <div class="acoes-linha palco__acoes">
-            <a class="botao botao--primario" href="{{ escritorio.contatos.whatsappUrl }}" target="_blank" rel="noopener noreferrer">Falar pelo WhatsApp</a>
-            <a class="botao" href="{{ url_for('publico.escritorio') }}">Conhecer o escritório</a>
+        <div class="palco__particulas" data-particulas aria-hidden="true"></div>
+
+        <div class="ato ato--abertura" data-ato="1">
+            <h1 class="palco__titulo" id="hero-titulo">
+                <span class="palco__linha"><span>Melo Fernandes</span></span>
+                <span class="palco__linha"><span>&amp; Vasconcelos</span></span>
+            </h1>
+            <p class="palco__sub">Advocacia em Sousa, Paraíba, desde {{ escritorio.fundacao }}.</p>
+            <div class="acoes-linha palco__acoes">
+                <a class="botao botao--primario" href="{{ escritorio.contatos.whatsappUrl }}" target="_blank" rel="noopener noreferrer">Falar pelo WhatsApp</a>
+                <a class="botao" href="{{ url_for('publico.escritorio') }}">Conhecer o escritório</a>
+            </div>
         </div>
-        <div class="palco__painel" data-painel>
+
+        <div class="filme" data-filme>
             <picture>
                 <source media="(max-width: 880px)" srcset="{{ url_for('static', filename='img/hero-equipe-mobile.webp') }}">
                 <img src="{{ url_for('static', filename='img/hero-equipe-desktop.webp') }}"
                      alt="Quatro integrantes da equipe da MFV Advocacia na sala de reuniões do escritório"
-                     width="1366" height="613" fetchpriority="high">
+                     width="1366" height="613" fetchpriority="high" decoding="async">
             </picture>
+            <div class="filme__veu" aria-hidden="true"></div>
+        </div>
+
+        <div class="ato ato--filme" data-ato="2" inert>
+            <div class="ato__base">
+                <div class="manchetes" data-manchetes>
+                    {% for manchete in manchetes %}
+                    <div class="manchete{% if loop.first %} manchete--ativa{% else %} manchete--depois{% endif %}">
+                        <p class="manchete__rotulo">{{ manchete.rotulo }}</p>
+                        <p class="manchete__titulo">
+                            {% for linha in manchete.linhas %}<span class="manchete__linha"><span>{{ linha }}</span></span>{% endfor %}
+                        </p>
+                        <p class="manchete__detalhe">{{ manchete.detalhe }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                <a class="seta-circulo" href="{{ escritorio.contatos.whatsappUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Falar pelo WhatsApp (abre em outra aba)">
+                    <span>Falar pelo WhatsApp</span>
+                    <span class="seta-circulo__disco" aria-hidden="true">↗</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="medidor" aria-hidden="true">
+            <span class="medidor__rotulo">Role para conhecer o escritório</span>
+            <span class="medidor__linha"><span data-medidor-fill></span></span>
+            <span class="medidor__valor" data-medidor-valor>00</span>
         </div>
     </div>
 </section>
@@ -55,39 +92,34 @@
     </div>
 </section>
 
-<section class="secao secao--marfim" aria-labelledby="atuacao">
+<section class="secao secao--papel" aria-labelledby="atuacao">
     <div class="contentor">
         <div class="cabeca-secao">
-            <p class="rotulo">Atuação</p>
-            <h2 id="atuacao">Para empresas e para pessoas</h2>
-            <p>Assessoria jurídica para empresas em diferentes estágios do negócio e atendimento a pessoas físicas, do consultivo ao contencioso.</p>
+            <h2 id="atuacao">Em que o escritório pode ajudar</h2>
+            <p>As oito áreas que o escritório destaca em seu site. Ele informa atuar em mais de {{ mais_de_n_areas }}.</p>
         </div>
-        <div class="grade-areas">
+        <ul class="indice">
             {% for area in areas %}
-            <article class="card-area{% if loop.first %} card-area--destaque escuro{% endif %}{% if loop.last %} card-area--ultima{% endif %}" data-tilt>
-                <div>
-                    <h3>{{ area.titulo }}</h3>
-                    <p>{{ area.resumo }}</p>
-                </div>
-                <a class="link-seta" href="{{ url_for('publico.areas') }}#{{ area.slug }}">Saiba mais<span class="so-leitor"> sobre {{ area.titulo }}</span></a>
-            </article>
+            <li class="indice__item">
+                <a href="{{ url_for('publico.areas') }}#{{ area.slug }}">
+                    <span class="indice__nome">{{ area.titulo }}</span>
+                    <span class="indice__resumo">{{ area.resumo }}</span>
+                    <span class="indice__seta" aria-hidden="true">›</span>
+                </a>
+            </li>
             {% endfor %}
-            <article class="card-area card-area--cta" data-tilt>
-                <div>
-                    <h3>Mais de {{ mais_de_n_areas }} áreas do Direito</h3>
-                    <p>Não encontrou a sua? Conte o seu caso ao escritório.</p>
-                </div>
-                <a class="link-seta" href="{{ url_for('publico.contato') }}">Falar com o escritório</a>
-            </article>
+        </ul>
+        <div class="indice__rodape">
+            <p>Não encontrou a sua área? Conte o seu caso ao escritório e ele orienta o melhor caminho.</p>
+            <a class="botao" href="{{ url_for('publico.contato') }}">Falar com o escritório</a>
         </div>
     </div>
 </section>
 
-<section class="secao secao--papel" aria-labelledby="onde">
+<section class="secao secao--marfim" aria-labelledby="onde">
     <div class="contentor">
         <div class="duas-colunas">
             <div class="duas-colunas__texto">
-                <p class="rotulo">Onde estamos</p>
                 <h2 id="onde">No centro de Sousa</h2>
                 <p>{{ escritorio.endereco.completo }}.</p>
                 <p>Atendimento por telefone e presencial: {{ escritorio.contatos.horarioAtendimento | lower }}.</p>
@@ -99,7 +131,7 @@
             <div class="foto-cartao" data-tilt>
                 <img src="{{ url_for('static', filename='img/fachada-mfv.webp') }}"
                      alt="Fachada do escritório da MFV Advocacia, com o letreiro dourado sobre revestimento de mármore escuro"
-                     width="810" height="600" loading="lazy">
+                     width="810" height="600" loading="lazy" decoding="async">
             </div>
         </div>
     </div>

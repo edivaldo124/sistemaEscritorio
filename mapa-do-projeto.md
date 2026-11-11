@@ -23,7 +23,7 @@ sistemaEscritorio/
 │
 ├── templates/
 │   ├── layouts/             # base, publico, admin
-│   ├── components/          # cabeçalho, rodapé, avisos, diálogo, navegação do painel
+│   ├── components/          # cabeçalho, rodapé, abertura da Home, avisos, diálogo, navegação do painel
 │   ├── publico/             # inicio, areas, escritorio, contato
 │   ├── auth/ · admin/ · clientes/ · processos/ · agenda/ · documentos/ · relatorios/ · chat/
 │   └── termos_de_servico · politica_privacidade · erro · login · recuperar

@@ -42,6 +42,16 @@
 }
 
 :root {
+    /* ---- Canais RGB das cores abaixo, para transparências em rgba(var(--x-rgb), alfa).
+       Único lugar em que um valor de cor é escrito; os outros arquivos só usam var(). ---- */
+    --obsidiana-rgb: 11, 11, 12;
+    --carvao-rgb: 29, 29, 31;
+    --luz-rgb: 245, 245, 247;
+    --branco-rgb: 255, 255, 255;
+    --ouro-1-rgb: 172, 140, 84;
+    --ouro-2-rgb: 200, 166, 116;
+    --bronze-rgb: 125, 95, 42;
+
     /* ---- Cores do design system original ---- */
     --parchment: #fefefc;
     --ink: #000000;
@@ -58,16 +68,16 @@
     --carvao: #1d1d1f; /* barra lateral do painel */
     --marfim: #f5f5f7; /* faixa clara alternada */
     --branco: #ffffff; /* cartão sobre a faixa marfim (exceção documentada no design-system.md) */
-    --linha-escura: rgba(245, 245, 247, 0.14);
-    --linha-clara: rgba(29, 29, 31, 0.14);
+    --linha-escura: rgba(var(--luz-rgb), 0.14);
+    --linha-clara: rgba(var(--carvao-rgb), 0.14);
     --borda-suave: #d2d2d7;
 
     /* ---- Extensão: texto ---- */
     --tinta: #1d1d1f;
     --tinta-2: #6e6e73;
     --luz: #f5f5f7;
-    --luz-2: rgba(245, 245, 247, 0.76);
-    --luz-3: rgba(245, 245, 247, 0.58);
+    --luz-2: rgba(var(--luz-rgb), 0.76);
+    --luz-3: rgba(var(--luz-rgb), 0.58);
 
     /* ---- Extensão: ouro do logotipo (#ac8c54, #c8a674, #e3c79d amostrados do arquivo oficial) ---- */
     --ouro-1: #ac8c54;
@@ -126,12 +136,25 @@
     /* ---- Sombras (só em cartões claros e no painel de vidro) ---- */
     --sombra-cartao: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.08);
     --sombra-hover: 0 4px 12px rgba(0, 0, 0, 0.06), 0 16px 40px rgba(0, 0, 0, 0.14);
-    --sombra-vidro: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(245, 245, 247, 0.12);
+    --sombra-vidro: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(var(--luz-rgb), 0.12);
 
     /* ---- Movimento ---- */
     --ease-saida: cubic-bezier(0.22, 1, 0.36, 1);
     --ease-apple: cubic-bezier(0.28, 0.11, 0.32, 1);
     --perspectiva: 1400px;
+
+    /* ---- Extensão de 10/11/2026: trilho cinematográfico da Home ----
+       Padrão Framerate (hero fixo controlado pela rolagem, manchetes que trocam, medidor 00-100,
+       abertura curta) portado para CSS + JS, sem vídeo: o "filme" é a foto da equipe. */
+    --altura-trilho: 340svh; /* quanto de rolagem o filme consome no desktop */
+    --altura-trilho-movel: 280svh;
+    --texto-micro: 0.6875rem; /* 11px: rótulos do medidor, da abertura e das manchetes */
+    --tracking-micro: 0.12em;
+    --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --dur-manchete: 780ms;
+    --dur-abertura: 500ms;
+    --z-abertura: 60;
+    --veu-filme: 0.38; /* escurecimento mínimo da foto em tela cheia, para o texto claro ler */
 
     /* ---- Apelidos usados pelo CSS anterior e pelo painel interno ---- */
     --linha: var(--linha-clara);

@@ -70,6 +70,33 @@ AREAS_DE_ATUACAO: List[Dict[str, str]] = [
     },
 ]
 
+# Manchetes do trilho cinematográfico da Home (padrão Framerate: a rolagem troca a manchete).
+# Cada título tem duas linhas curtas, como pede o padrão; os textos reaproveitam frases já
+# conferidas em conteudo.md (atuação, endereço e horário do site oficial; canais de contato).
+MANCHETES_INICIO: List[Dict[str, object]] = [
+    {
+        "rotulo": "Atuação",
+        "linhas": ["Para empresas", "e para pessoas."],
+        "detalhe": (
+            "Assessoria jurídica a empresas em diferentes estágios do negócio e atendimento "
+            "a pessoas físicas, do consultivo ao contencioso."
+        ),
+    },
+    {
+        "rotulo": "Onde estamos",
+        "linhas": ["No centro", "de Sousa."],
+        "detalhe": (
+            "Rua Lafaiete Píres Ferreira, 35, Centro. Atendimento por telefone e presencial de "
+            "segunda a sexta-feira, das 07h30 às 12h00 e das 13h30 às 18h00."
+        ),
+    },
+    {
+        "rotulo": "Contato",
+        "linhas": ["Fale com", "o escritório."],
+        "detalhe": "WhatsApp, telefone, e-mail ou uma visita ao escritório, no horário de atendimento.",
+    },
+]
+
 # Sócios-fundadores. Nome e OAB conferidos em fontes públicas (Diário Eletrônico da OAB e DJPB).
 # Fotos individuais não são legendadas pelo escritório, então nenhuma foto é ligada a um nome.
 SOCIOS_PUBLICOS: List[Dict[str, str]] = [

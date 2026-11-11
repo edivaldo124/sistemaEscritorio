@@ -17,6 +17,7 @@ from unittest import mock
 from urllib.parse import urlparse
 
 from backend.database import get_engine
+from servicos.conteudo_publico import MANCHETES_INICIO
 from servidor import criar_aplicacao
 
 PAGINAS_PUBLICAS = ["/", "/inicio", "/areas-de-atuacao", "/escritorio", "/contato", "/termos", "/privacidade"]
@@ -133,6 +134,28 @@ class SitePublicoTestCase(unittest.TestCase):
         html = resp.get_data(as_text=True)
         self.assertIn("Página não encontrada", html)
         self.assertIn('href="/contato"', html)
+
+
+    def test_home_tem_trilho_cinematografico_com_um_so_h1(self) -> None:
+        html = self._html("/")
+        self.assertEqual(html.count("<h1"), 1, "a Home deve ter um único h1: o nome do escritório")
+        self.assertIn("data-trilho", html)
+        self.assertIn('data-ato="1"', html)
+        self.assertIn('data-ato="2" inert', html, "o ato das manchetes nasce inerte: só o ato visível recebe foco")
+        self.assertEqual(html.count('class="manchete '), len(MANCHETES_INICIO))
+        for manchete in MANCHETES_INICIO:
+            for linha in manchete["linhas"]:
+                self.assertIn(linha, html)
+        self.assertEqual(html.count("data-abertura"), 1)
+        self.assertIn('data-medidor-valor>00<', html)
+
+    def test_paginas_publicas_sem_script_nem_estilo_inline(self) -> None:
+        for rota in PAGINAS_PUBLICAS:
+            html = self._html(rota)
+            with self.subTest(rota=rota):
+                self.assertNotRegex(html, r"<script(?![^>]*\bsrc=)[^>]*>", "todo script deve vir de static/js")
+                self.assertNotIn(" style=", html, "nenhum atributo style: a profundidade é escrita por variáveis CSS")
+                self.assertNotIn("<style", html)
 
 
 if __name__ == "__main__":

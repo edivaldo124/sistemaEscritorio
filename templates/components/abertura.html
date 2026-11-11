@@ -1,0 +1,18 @@
+{#- Abertura do site (padrão Framerate): tela cheia com o logotipo dourado e uma linha que varre.
+    Só aparece na primeira página desta aba (static/js/ativar-js.js marca <html class="abertura-pendente">),
+    nunca com movimento reduzido nem sem JavaScript. static/js/site.js a encerra quando as fontes e a foto
+    da equipe estão prontas, com um cão de guarda de 2,5 s. Decorativa: nada aqui é lido pelo leitor de tela. -#}
+<div class="abertura escuro" data-abertura aria-hidden="true">
+    <div class="abertura__topo">
+        <span>Melo Fernandes &amp; Vasconcelos</span>
+        <span>Sousa, Paraíba · {{ escritorio.fundacao }}</span>
+    </div>
+    <div class="abertura__centro">
+        <img src="{{ url_for('static', filename='img/logo-mfv-dourado.webp') }}" alt="" width="260" height="56" decoding="async">
+        <span class="abertura__barra"><span></span></span>
+    </div>
+    <div class="abertura__base">
+        <span>{{ escritorio.endereco.logradouro }}, {{ escritorio.endereco.numero }}</span>
+        <span>{{ escritorio.endereco.bairro }} · {{ escritorio.endereco.cidade }}/{{ escritorio.endereco.uf }}</span>
+    </div>
+</div>

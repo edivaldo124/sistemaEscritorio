@@ -26,7 +26,7 @@ Rodapé (todas as páginas): logo e razão social, páginas, contato e horário,
 ### 1. Início (`/`)
 
 - **Função:** apresentar o escritório e dar confiança nos primeiros segundos.
-- **Seções:** foto da equipe com o nome do escritório · história em uma frase · números (anos, áreas, sócios) · atuação para empresas e para pessoas · onde estamos · chamada final para contato.
+- **Seções:** abertura curta (só na primeira página da aba) · trilho cinematográfico: o nome do escritório sobre a foto da equipe, que cresce até a tela cheia, e então três manchetes trocadas pela rolagem (atuação para empresas e pessoas · onde estamos · contato) · história em uma frase · números (anos, áreas, sócios) · índice das oito áreas · onde estamos · chamada final para contato.
 - **Informação que deve aparecer:** nome, cidade, ano de instalação, endereço, horário.
 - **Ação esperada:** falar pelo WhatsApp, ou seguir para o escritório e as áreas.
 
@@ -57,7 +57,7 @@ Rodapé (todas as páginas): logo e razão social, páginas, contato e horário,
 |---|---|---|
 | Qualquer página | Início, Áreas, Escritório, Contato | cabeçalho e rodapé |
 | Qualquer página | WhatsApp | botão do cabeçalho |
-| Início | Escritório, Áreas, Contato, Mapa | botões do hero e das seções |
+| Início | WhatsApp, Escritório, Áreas, Contato, Mapa | botões do ato 1 do trilho, seta em círculo do ato 2, índice de áreas e botões das seções |
 | Áreas | Contato | botão no fim da página |
 | Escritório | Site oficial (blog, MFV Cast, eventos), MZA, Contato | links da página |
 

@@ -349,7 +349,7 @@ a.tag:hover {
 .campo textarea:focus {
     outline: none;
     border-color: var(--bronze);
-    box-shadow: 0 0 0 4px rgba(200, 166, 116, 0.35);
+    box-shadow: 0 0 0 4px rgba(var(--ouro-2-rgb), 0.35);
 }
 
 .campo-ajuda {
@@ -367,7 +367,7 @@ a.tag:hover {
 .escuro .campo select,
 .escuro .campo textarea {
     border-color: var(--linha-escura);
-    background: rgba(245, 245, 247, 0.06);
+    background: rgba(var(--luz-rgb), 0.06);
     color: var(--luz);
 }
 
@@ -379,7 +379,7 @@ a.tag:hover {
 .escuro .campo select:focus,
 .escuro .campo textarea:focus {
     border-color: var(--ouro-2);
-    box-shadow: 0 0 0 4px rgba(200, 166, 116, 0.28);
+    box-shadow: 0 0 0 4px rgba(var(--ouro-2-rgb), 0.28);
 }
 
 /* ---------- Avisos: alertas em linha, toasts e diálogo de confirmação ---------- */
@@ -421,7 +421,7 @@ a.tag:hover {
     gap: var(--espaco-12);
     padding: var(--espaco-16);
     border-radius: var(--raio-cartao-sm);
-    background: rgba(29, 29, 31, 0.92);
+    background: rgba(var(--carvao-rgb), 0.92);
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     color: var(--luz);
@@ -451,7 +451,7 @@ a.tag:hover {
 }
 
 .toast__fechar:hover {
-    background: rgba(245, 245, 247, 0.16);
+    background: rgba(var(--luz-rgb), 0.16);
 }
 
 .toast[hidden] {
@@ -477,7 +477,7 @@ a.tag:hover {
 }
 
 .dialogo-modal::backdrop {
-    background: rgba(11, 11, 12, 0.6);
+    background: rgba(var(--obsidiana-rgb), 0.6);
     -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
 }
@@ -506,7 +506,7 @@ a.tag:hover {
     padding: var(--espaco-32);
     border: 1px dashed var(--borda-suave);
     border-radius: var(--raio-cartao);
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(var(--branco-rgb), 0.6);
     color: var(--tinta-2);
     max-width: 60ch;
 }
@@ -565,7 +565,7 @@ body.admin-shell {
 
 .lateral__item.ativo,
 .lateral__item:hover {
-    background: rgba(245, 245, 247, 0.1);
+    background: rgba(var(--luz-rgb), 0.1);
     color: var(--luz);
 }
 
@@ -626,7 +626,7 @@ body.admin-shell {
 }
 
 .abas-processo a:hover {
-    background: rgba(29, 29, 31, 0.06);
+    background: rgba(var(--carvao-rgb), 0.06);
     color: var(--tinta);
 }
 
@@ -665,7 +665,7 @@ body.admin-shell {
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: radial-gradient(70% 60% at 20% 10%, rgba(200, 166, 116, 0.22), transparent 70%);
+    background: radial-gradient(70% 60% at 20% 10%, rgba(var(--ouro-2-rgb), 0.22), transparent 70%);
 }
 
 .auth-vitrine::after {

@@ -1,9 +1,9 @@
 # Auditoria — Site da MFV Advocacia
 
-Data: 06/11/2026 · Projeto: redesign multipágina do site da MFV Advocacia (Sousa/PB).
+Data: 06/11/2026, com o ciclo 6 em 11/11/2026 · Projeto: redesign multipágina do site da MFV Advocacia (Sousa/PB).
 Documentos de apoio: [briefing.md](briefing.md) · [mapa-site.md](mapa-site.md) · [conteudo.md](conteudo.md) · [design-system.md](design-system.md).
 
-**Como testei:** servidor Flask local com banco de teste, Chromium em 1440×900 (desktop) e 390×844 (celular), 14 testes de Python (`python3 -m unittest backend.tests.test_api backend.tests.test_site_publico`) e 4 de Jest.
+**Como testei:** servidor Flask local com banco de teste, Chromium em 1440×900 (desktop) e 390×844 (celular), 22 testes de Python (`python3 -m unittest discover -s backend/tests`) e 4 de Jest. No ciclo 6 as capturas foram tiradas por um roteiro do Playwright em seis pontos da rolagem do trilho (0, 12, 30, 55, 80 e 100%), nas duas larguras e com movimento reduzido emulado.
 
 > **Sobre os prompts.** Os campos "Prompt utilizado" foram escritos a partir de cada problema observado, no formato pedido pela atividade, e aplicados nesta sessão. Se você digitou algo diferente, ajuste o texto para o que de fato usou.
 
@@ -20,7 +20,7 @@ Documentos de apoio: [briefing.md](briefing.md) · [mapa-site.md](mapa-site.md) 
 | **Design System** | Tipografia, cores, componentes e espaçamento respeitam o DESIGN.md? | Busca no CSS por cores fora do `tokens.css`; leitura das seções do design system | Nenhum hex de cor visível fora de `tokens.css` (a máscara do monograma usa `#000` só como canal alfa). **Divergências assumidas** (ciclo 5): sombras em cartões, botões em pílula, ouro do logotipo e `#ffffff` nos cartões do painel. Estão listadas na seção "Extensão de 06/11/2026" do próprio [design-system.md](design-system.md). |
 | **Responsividade** | Menu, textos, imagens, cards e botões funcionam em largura menor? | 6 páginas em 390 px, medindo estouro horizontal | Nenhuma estoura. O hero troca para a foto vertical. |
 | **Legibilidade** | Tamanho, contraste e comprimento dos textos estão adequados? | Cálculo de contraste WCAG; linhas limitadas a cerca de 68 caracteres | Corpo 19,6:1, secundário 9,6:1, legenda 5,3:1. **Exceção:** o placeholder do design system (#98a7aa) dá 2,5:1. Mantive porque o sistema o define, e todo campo tem rótulo visível. |
-| **Visual** | Alguma área ainda parece genérica? | Revisão das capturas | Os painéis pastel "Empresas" e "Pessoas" são mais genéricos: sem imagem própria, só texto. Reduzi a altura, mas continuam o ponto mais fraco. |
+| **Visual** | Alguma área ainda parece genérica? | Revisão das capturas | Os painéis pastel (v1) e depois a grade de oito cartões brancos (v2) eram o ponto mais genérico da Home. No ciclo 6 a grade virou um índice editorial em duas colunas, e o hero virou o trilho cinematográfico. |
 
 ---
 
@@ -80,6 +80,15 @@ Formato: **OBSERVAR → IDENTIFICAR → EXPLICAR → CORRIGIR → TESTAR → DEC
 - **ACHADOS DURANTE O TESTE (corrigidos):** retângulos soltos sob o painel (base do monograma, agora esmaecida); rótulo sobreposto ao título nas páginas internas (avanço em Z removido); botões encostados na borda no celular (a cena da Home não tinha margem); selo "MFV" do painel apertado.
 - **DECISÃO:** mantido. Ressalva: o "parecido com o reel" é uma **inferência**, veja a pendência 1.
 
+### Ciclo 6 — Trilho cinematográfico (padrão Framerate) e índice editorial
+
+- **PROBLEMA:** o autor pediu de novo algo "parecido com o reel, seguindo o que está nos arquivos", citando as skills framerate-scroll-video-site, frontend-design, react-3d-motion e apple-design. O hero do ciclo 5 era um painel que se endireitava em 55% de uma tela de rolagem e parava; não havia o hero fixo controlado pela rolagem, as manchetes que trocam, o medidor nem a abertura que o padrão Framerate traz. A grade de oito cartões brancos na Home ainda era o trecho mais genérico do site.
+- **PROMPT UTILIZADO:** "Quero uma coisa parecida com isso [reel] mas seguindo o que está nos arquivos; faça bem feito, refine todo o sistema." (com as quatro skills)
+- **RESULTADO:** a Home ganhou um trilho de 340svh (280svh no celular) com o palco fixo: no ato 1 a foto da equipe nasce como painel de vidro inclinado e cresce até a tela cheia; no ato 2 três manchetes (atuação, onde estamos, contato) trocam em partes iguais da rolagem, com rótulo dourado, título em duas linhas e detalhe, seta em círculo para o WhatsApp e medidor 00–100. Abertura curta com o logotipo dourado só na primeira página da aba. O padrão Framerate (Next.js + vídeo) foi portado para CSS + JS porque o site roda em Flask sem bundler e porque [conteudo.md](conteudo.md) decidiu não usar os vídeos do escritório. A grade de cartões virou um índice editorial. As transparências passaram a usar canais `rgba(var(--x-rgb), alfa)` definidos em `tokens.css`; nenhum outro arquivo escreve cor. A foto móvel da equipe foi regenerada em 1080px a partir do original. Detalhes na seção "Extensão de 10/11/2026" do [design-system.md](design-system.md).
+- **TESTE:** 22 testes de Python e 4 de Jest passam (dois novos: um só `h1`, três manchetes, ato 2 inerte, abertura única; nenhum script ou `style` inline nas páginas públicas). No Chromium: zero erros de console; nenhuma das larguras estoura na horizontal; a abertura some em cerca de 0,85 s; ao topo o ato 2 está inerte e a ordem de foco pelo teclado passa por skip-link, marca, menu, WhatsApp e os dois botões do ato 1, sem cair no link escondido; no fim do trilho é o ato 1 que fica inerte. Rolagem programada pelo trilho: 90 quadros, média de 16,7 ms (60 fps), pior quadro 33,8 ms. Com movimento reduzido: sem abertura, sem medidor, trilho vira seção comum com a foto parada.
+- **ACHADOS DURANTE O TESTE (corrigidos):** o título ainda aparecia sobre a foto no meio da transição (passou a sumir mais rápido e subir mais); o rótulo do medidor encostava no canto do painel no desktop (painel de 1000px e coluna do rótulo mais estreita); a borda superior da foto ficava dura durante o crescimento (o véu ganhou uma faixa escura no topo, que também segura o cabeçalho em tela cheia).
+- **DECISÃO:** mantido. O que ainda é inferência sobre o reel continua na pendência 1.
+
 ---
 
 ## 4. Checklist antes de terminar
@@ -97,13 +106,15 @@ Formato: **OBSERVAR → IDENTIFICAR → EXPLICAR → CORRIGIR → TESTAR → DEC
 
 ## 5. Pendências e riscos
 
-1. **Reel do Instagram: só vi a capa e a legenda, não o movimento.** O download exige login. Pelo player público de incorporação consegui a capa (um site de portfólio num notebook, fundo escuro, título vermelho enorme e rosto em recorte) e a legenda ("Comenta Portfólio pra receber o prompt na DM", com as hashtags #claudecode e #webdesign). Os efeitos que implementei (painel que se endireita ao rolar, camadas em profundidade, parallax com o mouse, palavras que acendem, cartões que inclinam) são os que esse tipo de portfólio costuma ter. **Não os vi no vídeo.** Para acertar, envie o arquivo do reel (baixe pelo celular ou grave a tela) ou descreva em uma frase o que mais chamou a sua atenção.
+1. **Reel do Instagram: só vi a capa e a legenda, não o movimento.** O download exige login. Pelo player público de incorporação consegui a capa (um site de portfólio num notebook, fundo escuro, título vermelho enorme e rosto em recorte) e a legenda ("Comenta Portfólio pra receber o prompt na DM", com as hashtags #claudecode, #webdesign, #landingpage, #portfólio e #vibecoding). No ciclo 6 o hero passou a seguir um padrão nomeado (os templates Framerate, pedidos pelo autor pela skill): hero fixo controlado pela rolagem, manchetes que trocam, medidor e abertura. **Continuo sem ter visto o vídeo.** Para acertar o que faltar, envie o arquivo do reel (baixe pelo celular ou grave a tela) ou descreva em uma frase o que mais chamou a sua atenção.
 2. **Autorização das imagens.** Logotipo e fotos são do escritório, copiados de mfv.adv.br. Para a sala de aula está claro no rodapé. Para publicar, peça autorização.
 3. **Telefone.** O site oficial diz (83) 98122-9292. O Google Maps mostra (83) 98199-9292. Usei o do site. Confirme com o escritório.
 4. **Fotos sem nome.** O escritório não identifica quem aparece em cada foto. A Home mostra quatro pessoas e a página do escritório mostra duas. Nenhuma foto foi ligada a um nome.
 5. **Avaliações do Google.** Existem (5,0 com 31 avaliações, em 06/11/2026), mas ficaram de fora. Motivo em [conteudo.md](conteudo.md).
 6. **Segurança do sistema interno (não alterei).** As páginas `/painel`, `/clientes`, `/processos` abrem sem login; quem não está logado é tratado como a sócia administradora. O servidor aceita os cabeçalhos `X-MFV-Role` e `X-MFV-User-Email` de qualquer cliente. Há PINs fixos no código (inclusive os números de OAB, que são públicos) e uma chave de sessão padrão. O teste `test_05` depende desse comportamento. Se o sistema for hospedado com dados reais, isso precisa ser corrigido antes. **Mitigação na hospedagem (06/11/2026):** com `MODO_PUBLICO=true`, `servidor.py` responde só às páginas públicas e aos estáticos; `/api/*`, `/login`, `/painel` e o resto devolvem 404 (teste em `backend/tests/test_site_publico.py`). A trava esconde o problema, não o resolve: antes de ligar o sistema interno na internet, troque o fallback de sócia por 401, remova os PINs fixos e os cabeçalhos `X-MFV-*`, e use banco durável.
 7. **Duas interfaces.** As pastas `app/`, `components/`, `lib/` e `prisma/` (Next.js) duplicam as telas e ainda trazem dados antigos, como o telefone `8804-0135` e a data `30/03/2015`. Não mexi nelas. Decida se o Next.js continua ou sai.
+8. **Foto da equipe em tela cheia.** O site oficial só tem a foto horizontal em 1366×613. No ato 2 do trilho ela cobre a janela inteira, então em telas de 1920px ela é ampliada cerca de 1,4× (o véu escuro disfarça, mas não resolve). Se o escritório tiver o arquivo original da sessão de fotos em resolução maior, troque `static/img/hero-equipe-desktop.webp` por uma versão de 2560px.
+9. **Abertura do site.** A tela de abertura (padrão Framerate) atrasa a primeira pintura em até 0,9 s na primeira página de cada aba. Se preferir o site sem ela, basta tirar o `include` de `components/abertura.html` em `templates/publico/inicio.html`; o resto não depende dela.
 
 ---
 

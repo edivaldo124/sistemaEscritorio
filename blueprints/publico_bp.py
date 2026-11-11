@@ -15,6 +15,7 @@ from servicos.conteudo_publico import (
     AREAS_DE_ATUACAO,
     FRENTES_DE_CONTEUDO,
     MAIS_DE_N_AREAS,
+    MANCHETES_INICIO,
     NAVEGACAO_PUBLICA,
     SOCIOS_PUBLICOS,
     anos_de_atuacao,
@@ -35,6 +36,7 @@ def inicio() -> Any:
     return render_template(
         "publico/inicio.html",
         areas=AREAS_DE_ATUACAO,
+        manchetes=MANCHETES_INICIO,
         anos_atuacao=anos_de_atuacao(),
         mais_de_n_areas=MAIS_DE_N_AREAS,
     )
