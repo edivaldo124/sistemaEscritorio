@@ -1,11 +1,9 @@
 # Briefing — Site da MFV Advocacia
 
-Atividade: *Do briefing ao site multipágina com IA* (Desenvolvimento de Aplicações Web).
-Negócio escolhido: **Melo Fernandes & Vasconcelos Advocacia (MFV)**, escritório real de Sousa, Paraíba.
-Informações conferidas em fontes públicas em 06/11/2026. A origem de cada dado está em [conteudo.md](conteudo.md).
-
-> O briefing anterior, que descrevia o sistema interno de gestão do escritório, foi preservado em
-> [docs/sistema-interno/briefing-sistema-interno.md](docs/sistema-interno/briefing-sistema-interno.md).
+> **Papel deste arquivo** (roteiro, etapa 6): responde **PARA QUEM** e **POR QUÊ**.
+> Atividade: *Do briefing ao site multipágina com IA* (Desenvolvimento de Aplicações Web).
+> Negócio escolhido: **Melo Fernandes & Vasconcelos Advocacia (MFV)**, escritório real de Sousa, Paraíba.
+> Informações conferidas em fontes públicas em 06/11/2026. A origem de cada dado está em [conteudo.md](conteudo.md). Nada foi inventado.
 
 ## O negócio
 
@@ -32,7 +30,7 @@ Quem procura um advogado está diante de uma decisão sensível e tem poucas for
 
 ## Objetivo do site
 
-Apresentar o escritório com credibilidade e levar o visitante ao primeiro contato. Esta é uma primeira versão profissional, apresentada ao proprietário como proposta de redesign.
+Apresentar o escritório com credibilidade e levar o visitante ao primeiro contato. Esta é uma primeira versão profissional, apresentada ao proprietário como proposta de redesign do site atual (mfv.adv.br).
 
 ## Proposta de valor
 
@@ -47,15 +45,35 @@ Um escritório do Sertão paraibano que atua com empresas e pessoas, com sócios
 
 Não entram como diferencial: depoimentos, resultados de causas, prêmios, preços ou comparações com outros escritórios. O Provimento 205/2021 da OAB limita esse tipo de publicidade na advocacia.
 
-## Ação principal (CTA)
+## CTA principal
 
-**Falar pelo WhatsApp.** A ação secundária é conhecer o escritório. Em todas as páginas há um caminho curto até o contato.
+**Falar pelo WhatsApp.** O CTA secundário é **conhecer o escritório** (página O escritório). Em todas as páginas há um caminho curto até o contato: o botão do cabeçalho e uma chamada no fim da página.
 
 ## Personalidade da comunicação
 
 - **Sóbria e clara.** Linguagem simples, sem jargão e sem promessa de resultado.
 - **Humana.** Fala de pessoas e de lugar, não de "soluções".
-- **Editorial.** Visual de publicação jurídica: papel creme, tinta preta, serifa leve, muito espaço em branco. Segue [design-system.md](design-system.md), sem alterá-lo.
+- **Cuidadosa com o que afirma.** Informa o que o escritório publica; não promete resultado nem compara com outros escritórios.
+
+O visual segue o [design-system.md](design-system.md): referência editorial (serifa leve, muito espaço em branco) com as extensões registradas nele (faixas escuras, ouro do logotipo e trilho cinematográfico na Home).
+
+## Materiais disponíveis
+
+As siglas de origem (SO, CNPJ, OAB, GM) estão explicadas em [conteudo.md](conteudo.md).
+
+| Material | Origem | Uso no site |
+|---|---|---|
+| Logotipo (versões clara e dourada) e monograma "M" | SO | Cabeçalho, rodapé, abertura da Home, marca d'água |
+| Foto da equipe na sala de reuniões (horizontal e vertical) | SO (`EquipeDesktop.png`, `EquipeMobile.png`) | Trilho da Home |
+| Retrato de duas pessoas da equipe | SO (`DSC_9192.jpg`) | O escritório |
+| Fachada do escritório | SO (`estrutura.png`) | Home, "No centro de Sousa" |
+| Textos: história, áreas, contatos e horário | SO | Todas as páginas |
+| Dados cadastrais: CNPJ, sócios e OAB | CNPJ e OAB | Rodapé e O escritório |
+| Instagram, Facebook, WhatsApp e e-mail | SO | Rodapé e Contato |
+| Blog, MFV Cast e eventos | SO | Links em O escritório |
+| Ficha do Google Maps | GM | Só para conferir endereço e horário (as avaliações não foram publicadas) |
+| Vídeos `MFV1.mp4` (15 MB) e `MFV3.mp4` (2 MB) | SO | Não usados |
+| Imagens do carrossel de áreas (`Trabalhista.png`, `Civil.png` e outras) | SO | Não usadas |
 
 ## Fora do escopo desta versão
 

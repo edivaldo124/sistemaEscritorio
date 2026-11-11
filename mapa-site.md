@@ -1,10 +1,8 @@
 # Mapa do site — MFV Advocacia
 
-Define as páginas, o papel de cada uma e o que o visitante deve fazer nela.
-Base: [briefing.md](briefing.md). Os textos finais estão em [conteudo.md](conteudo.md).
-
-> O mapa anterior, do sistema interno de gestão, foi preservado em
-> [docs/sistema-interno/mapa-do-sistema-interno.md](docs/sistema-interno/mapa-do-sistema-interno.md).
+> **Papel deste arquivo** (roteiro, etapa 6): responde **O QUE será construído**. É o **único mapa** do projeto.
+> Base: [briefing.md](briefing.md). Os textos finais e os CTAs de cada página estão em [conteudo.md](conteudo.md).
+> A estrutura de pastas do código está em [README.md](README.md) e em [AGENTS.md](AGENTS.md).
 
 ## Estrutura
 
@@ -17,6 +15,8 @@ Base: [briefing.md](briefing.md). Os textos finais estão em [conteudo.md](conte
 ├─ /privacidade       Privacidade e LGPD       (rodapé)
 └─ /login             Área restrita da equipe  (rodapé; fora do site público)
 ```
+
+Na hospedagem pública (`MODO_PUBLICO=true`) respondem só as páginas do site (Início, Áreas, O escritório, Contato, Termos e Privacidade). `/login` e o sistema interno dão erro 404.
 
 Cabeçalho (todas as páginas): logo → Início · Áreas de atuação · O escritório · Contato · WhatsApp.
 Rodapé (todas as páginas): logo e razão social, páginas, contato e horário, redes sociais, termos, privacidade e área restrita.
@@ -34,22 +34,31 @@ Rodapé (todas as páginas): logo e razão social, páginas, contato e horário,
 
 - **Função:** mostrar em que o escritório pode ajudar.
 - **Seções:** introdução · lista das oito áreas que o escritório destaca · convite para quem não encontrou a sua área.
-- **Informação:** nome de cada área e uma definição neutra do que ela abrange.
+- **Informação que deve aparecer:** nome de cada área e uma definição neutra do que ela abrange.
 - **Ação esperada:** reconhecer o seu caso e entrar em contato.
 
 ### 3. O escritório (`/escritorio`)
 
 - **Função:** dar rosto e história ao escritório.
 - **Seções:** história e fundação · sócios-fundadores com número da OAB · eventos e conteúdo (palestras, blog, MFV Cast) · parceria.
-- **Informação:** quem fundou, quando, onde, como o escritório se comunica.
+- **Informação que deve aparecer:** quem fundou, quando, onde, como o escritório se comunica.
 - **Ação esperada:** conhecer os sócios e falar com o escritório.
 
 ### 4. Contato (`/contato`)
 
 - **Função:** tornar o primeiro contato fácil.
 - **Seções:** canais (WhatsApp, telefone, e-mail, endereço, horário, redes) · formulário que monta a mensagem e abre o WhatsApp.
-- **Informação:** todos os canais oficiais e o horário.
+- **Informação que deve aparecer:** todos os canais oficiais e o horário.
 - **Ação esperada:** enviar a mensagem pelo WhatsApp.
+
+### Páginas de apoio
+
+| Página | Função | Ação esperada |
+|---|---|---|
+| `/termos` | Dizer o que este site é: um redesign acadêmico, não o site oficial; de quem são a marca e as mídias; o que são os links externos. | Entender os limites do site. |
+| `/privacidade` | Dizer o que o site coleta (nada), o que faz o formulário e como falar com o escritório sobre dados pessoais (LGPD). | Saber a quem pedir informação sobre seus dados. |
+| `/login` e `/recuperar` | Acesso da equipe ao sistema interno. Não faz parte do site público. | Entrar (só a equipe). |
+| Erro 404 | Orientar quando o endereço não existe. | Voltar ao início ou falar com o escritório. |
 
 ## Navegação e acesso
 

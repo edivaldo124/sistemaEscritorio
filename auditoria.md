@@ -1,11 +1,11 @@
 # Auditoria — Site da MFV Advocacia
 
-Data: 06/11/2026, com o ciclo 6 em 11/11/2026 · Projeto: redesign multipágina do site da MFV Advocacia (Sousa/PB).
+Data: 06/11/2026 (ciclos 1 a 5) e 10 a 11/11/2026 (ciclo 6). Os `.md` do roteiro foram revisados em 11/11/2026 · Projeto: redesign multipágina do site da MFV Advocacia (Sousa/PB).
 Documentos de apoio: [briefing.md](briefing.md) · [mapa-site.md](mapa-site.md) · [conteudo.md](conteudo.md) · [design-system.md](design-system.md).
 
-**Como testei:** servidor Flask local com banco de teste, Chromium em 1440×900 (desktop) e 390×844 (celular), 22 testes de Python (`python3 -m unittest discover -s backend/tests`) e 4 de Jest. No ciclo 6 as capturas foram tiradas por um roteiro do Playwright em seis pontos da rolagem do trilho (0, 12, 30, 55, 80 e 100%), nas duas larguras e com movimento reduzido emulado.
+**Como testei:** servidor Flask local com banco de teste, Chromium em 1440×900 (desktop) e 390×844 (celular), 29 testes de Python (`python3 -m unittest discover -s backend/tests`: 22 do site e do sistema e 7 que travam os `.md` do roteiro) e 4 de Jest. No ciclo 6 as capturas foram tiradas por um roteiro do Playwright em seis pontos da rolagem do trilho (0, 12, 30, 55, 80 e 100%), nas duas larguras e com movimento reduzido emulado.
 
-> **Sobre os prompts.** Os campos "Prompt utilizado" foram escritos a partir de cada problema observado, no formato pedido pela atividade, e aplicados nesta sessão. Se você digitou algo diferente, ajuste o texto para o que de fato usou.
+> **Nota para o autor (apagar antes de entregar) — sobre os prompts.** Os campos "Prompt utilizado" foram escritos a partir de cada problema observado, no formato pedido pela atividade, e aplicados nas sessões de trabalho. Se você digitou algo diferente, ajuste o texto para o que de fato usou.
 
 ---
 
@@ -14,12 +14,12 @@ Documentos de apoio: [briefing.md](briefing.md) · [mapa-site.md](mapa-site.md) 
 | Critério | Pergunta | O que verifiquei | Resultado |
 |---|---|---|---|
 | **Conteúdo** | Os textos fazem sentido e ajudam o visitante? | Cada fato contra fontes públicas ([conteudo.md](conteudo.md)) | Corrigi horário, Instagram e data de fundação. Removi cargos e varas sem fonte. Nada de depoimentos, resultados ou preços. |
-| **Hierarquia** | É fácil perceber o que é mais importante? | Home em 1440 px | Título de 88 px sobre a foto, um botão preenchido por tela e filetes de 1 px separando as seções. |
+| **Hierarquia** | É fácil perceber o que é mais importante? | Home em 1440 px e em 390 px, parada e rolando o trilho | O título abre o trilho sobre a foto da equipe. Cada seção tem um botão principal (dourado, preenchido) e os demais em contorno. Faixas escuras e claras separam as seções. |
 | **Navegação** | Links, menu e CTAs funcionam? | Teste automático de todos os links e arquivos internos; menu móvel clicado; tecla Esc | Todos os destinos respondem. O Esc fecha o menu e devolve o foco ao botão. |
 | **Consistência** | Todas as páginas parecem do mesmo produto? | Mesmo cabeçalho, rodapé e tokens nas 4 páginas, nos termos, na privacidade, no erro e no acesso | Sim. A tela de erro e o diálogo de confirmação ganharam estilo. |
-| **Design System** | Tipografia, cores, componentes e espaçamento respeitam o DESIGN.md? | Busca no CSS por cores fora do `tokens.css`; leitura das seções do design system | Nenhum hex de cor visível fora de `tokens.css` (a máscara do monograma usa `#000` só como canal alfa). **Divergências assumidas** (ciclo 5): sombras em cartões, botões em pílula, ouro do logotipo e `#ffffff` nos cartões do painel. Estão listadas na seção "Extensão de 06/11/2026" do próprio [design-system.md](design-system.md). |
+| **Design System** | Tipografia, cores, componentes e espaçamento respeitam o DESIGN.md? | Busca no CSS por cores fora do `tokens.css`; leitura das seções do design system; teste que confere o texto original do `design-system.md` | O texto original do Refero (Legora) está **intacto** (teste com o hash dos primeiros 23.247 bytes). Cores, fontes, espaços e raios saem de `tokens.css`. **Divergências assumidas**, a pedido do autor: sombras em cartões, botões em pílula, ouro do logotipo, `#ffffff` nos cartões do painel e o trilho cinematográfico. Estão nas seções "Extensão de 06/11/2026" e "Extensão de 10/11/2026" do próprio [design-system.md](design-system.md). Veja a pendência 10. |
 | **Responsividade** | Menu, textos, imagens, cards e botões funcionam em largura menor? | 6 páginas em 390 px, medindo estouro horizontal | Nenhuma estoura. O hero troca para a foto vertical. |
-| **Legibilidade** | Tamanho, contraste e comprimento dos textos estão adequados? | Cálculo de contraste WCAG; linhas limitadas a cerca de 68 caracteres | Corpo 19,6:1, secundário 9,6:1, legenda 5,3:1. **Exceção:** o placeholder do design system (#98a7aa) dá 2,5:1. Mantive porque o sistema o define, e todo campo tem rótulo visível. |
+| **Legibilidade** | Tamanho, contraste e comprimento dos textos estão adequados? | Cálculo de contraste WCAG da paleta atual; textos corridos limitados a cerca de 68 caracteres por linha | Faixa clara: texto 16,7:1, secundário 5,0:1 (4,7:1 sobre marfim), ouro escuro 5,9:1. Faixa escura: texto 18,1:1, secundário 10,5:1, legenda 6,4:1, rótulos dourados e botão principal 8,6:1. Tudo acima de 4,5:1. **Exceção:** o placeholder do design system (`#98a7aa`) dá 2,5:1; mantido porque o sistema o define, e todo campo tem rótulo visível. Sobre a foto da equipe o texto depende do véu escuro, e esse contraste não foi medido ponto a ponto. |
 | **Visual** | Alguma área ainda parece genérica? | Revisão das capturas | Os painéis pastel (v1) e depois a grade de oito cartões brancos (v2) eram o ponto mais genérico da Home. No ciclo 6 a grade virou um índice editorial em duas colunas, e o hero virou o trilho cinematográfico. |
 
 ---
@@ -36,6 +36,8 @@ Documentos de apoio: [briefing.md](briefing.md) · [mapa-site.md](mapa-site.md) 
 | 6 | `app.js` e `modal.js` não eram carregados por nenhum template, e o modal procurava ids que não existiam. Formulários com `data-api` não usavam a API. | **Feito:** unificados em `componentes.js`. Testei o cadastro de cliente de ponta a ponta. |
 | 7 | Fontes do sistema (Georgia, system-ui) no lugar das indicadas pelo design system. | **Feito:** Cormorant Garamond (substituta da Rhymes Display) e Inter, hospedadas no próprio site. |
 | 8 | Painel interno e Next.js: duas interfaces para o mesmo sistema. | **Pendente:** veja a seção 5. |
+| 9 | Havia **dois mapas** do projeto (`mapa-site.md` e `mapa-do-projeto.md`) e um terceiro em `docs/`. O roteiro pede um só, o do site. | **Feito:** só `mapa-site.md` resta. A estrutura de pastas foi para o [README.md](README.md). Um teste falha se aparecer outro arquivo de mapa. |
+| 10 | Os `.md` do roteiro estavam fora do formato pedido: o `briefing.md` não tinha "Materiais disponíveis" e ainda descrevia o visual em creme "sem alterar" o design system; o `conteudo.md` não listava os CTAs de cada página nem o texto do trilho; havia frases em primeira pessoa. | **Feito:** reescritos conforme as etapas 2, 3 e 4. Um teste compara títulos, botões e rótulos das quatro páginas com o `conteudo.md`. |
 
 ---
 
@@ -115,6 +117,8 @@ Formato: **OBSERVAR → IDENTIFICAR → EXPLICAR → CORRIGIR → TESTAR → DEC
 7. **Duas interfaces.** As pastas `app/`, `components/`, `lib/` e `prisma/` (Next.js) duplicam as telas e ainda trazem dados antigos, como o telefone `8804-0135` e a data `30/03/2015`. Não mexi nelas. Decida se o Next.js continua ou sai.
 8. **Foto da equipe em tela cheia.** O site oficial só tem a foto horizontal em 1366×613. No ato 2 do trilho ela cobre a janela inteira, então em telas de 1920px ela é ampliada cerca de 1,4× (o véu escuro disfarça, mas não resolve). Se o escritório tiver o arquivo original da sessão de fotos em resolução maior, troque `static/img/hero-equipe-desktop.webp` por uma versão de 2560px.
 9. **Abertura do site.** A tela de abertura (padrão Framerate) atrasa a primeira pintura em até 0,9 s na primeira página de cada aba. Se preferir o site sem ela, basta tirar o `include` de `components/abertura.html` em `templates/publico/inicio.html`; o resto não depende dela.
+10. **`design-system.md` foi estendido.** O roteiro diz "Não altere o DESIGN.md inicialmente" e pede que o site siga o design system, corrigindo as divergências no site. O autor pediu o visual escuro com ouro e o trilho cinematográfico, então o arquivo ganhou duas extensões datadas **ao final**; o texto original continua idêntico (conferido por `cmp` com a cópia de 06/11 e por teste). Risco: o professor pode ler "escuro, ouro e botões em pílula" como uma segunda identidade visual. Se ele exigir o design system puro, há duas saídas: mover as extensões para outro arquivo e deixar o `design-system.md` como veio, ou voltar o site ao creme da versão 1 (que o autor não aprovou). **Decisão do autor.**
+11. **Pasta `site/` do roteiro.** A etapa 6 mostra `projeto/` com os quatro `.md` e uma pasta `site/`. Aqui o site fica na raiz, junto do sistema interno, e a raiz faz o papel de `projeto/`. Mover o código para `site/` exigiria mudar também a hospedagem (o Render inicia por `gunicorn app:app` na raiz). Não foi movido.
 
 ---
 
