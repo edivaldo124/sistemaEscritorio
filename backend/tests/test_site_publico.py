@@ -20,8 +20,8 @@ from backend.database import get_engine
 from servicos.conteudo_publico import MANCHETES_INICIO
 from servidor import criar_aplicacao
 
-PAGINAS_PUBLICAS = ["/", "/inicio", "/areas-de-atuacao", "/escritorio", "/contato", "/termos", "/privacidade"]
-PAGINAS_DE_CONTEUDO = ["/", "/areas-de-atuacao", "/escritorio", "/contato"]
+PAGINAS_PUBLICAS = ["/", "/inicio", "/areas-de-atuacao", "/escritorio", "/artigos", "/contato", "/termos", "/privacidade"]
+PAGINAS_DE_CONTEUDO = ["/", "/areas-de-atuacao", "/escritorio", "/artigos", "/contato"]
 
 
 class _ColetorDeLinks(HTMLParser):
@@ -59,7 +59,7 @@ class SitePublicoTestCase(unittest.TestCase):
         for rota in PAGINAS_PUBLICAS:
             with self.subTest(rota=rota):
                 html = self._html(rota)
-                for destino in ("/areas-de-atuacao", "/escritorio", "/contato"):
+                for destino in ("/areas-de-atuacao", "/escritorio", "/artigos", "/contato"):
                     self.assertIn(f'href="{destino}"', html)
                 self.assertIn("<footer", html)
 
@@ -127,6 +127,17 @@ class SitePublicoTestCase(unittest.TestCase):
         self.assertNotIn("19.571", html)
         self.assertNotIn("barbara@mfv.adv.br", html)
         self.assertIn('type="password"', html)
+
+    def test_artigos_trazem_os_quatro_textos_do_blog_oficial(self) -> None:
+        html = self._html("/artigos")
+        for titulo in (
+            "Compliance empresarial: por onde começar",
+            "Agenda de eventos 2026: atualização e mercado",
+            "Contratos essenciais para empresas: o básico bem feito",
+            "MFV celebra 10 anos de atuacao",
+        ):
+            self.assertIn(titulo, html)
+        self.assertEqual(html.count("https://mfv.adv.br/blog/"), 4)
 
     def test_pagina_de_erro_usa_o_layout_publico(self) -> None:
         resp = self.client.get("/essa-pagina-nao-existe")

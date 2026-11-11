@@ -10,15 +10,16 @@
 /                     Início
 ├─ /areas-de-atuacao  Áreas de atuação
 ├─ /escritorio        O escritório
+├─ /artigos          Artigos
 ├─ /contato           Contato
 ├─ /termos            Termos de uso            (rodapé)
 ├─ /privacidade       Privacidade e LGPD       (rodapé)
 └─ /login             Área restrita da equipe  (rodapé; fora do site público)
 ```
 
-Na hospedagem pública (`MODO_PUBLICO=true`) respondem só as páginas do site (Início, Áreas, O escritório, Contato, Termos e Privacidade). `/login` e o sistema interno dão erro 404.
+Na hospedagem pública (`MODO_PUBLICO=true`) respondem só as páginas do site (Início, Áreas, O escritório, Artigos, Contato, Termos e Privacidade). `/login` e o sistema interno dão erro 404.
 
-Cabeçalho (todas as páginas): logo → Início · Áreas de atuação · O escritório · Contato · WhatsApp.
+Cabeçalho (todas as páginas): logo → Início · Áreas de atuação · O escritório · Artigos · Contato · WhatsApp.
 Rodapé (todas as páginas): logo e razão social, páginas, contato e horário, redes sociais, termos, privacidade e área restrita.
 
 ## Páginas
@@ -47,9 +48,16 @@ Rodapé (todas as páginas): logo e razão social, páginas, contato e horário,
 ### 4. Contato (`/contato`)
 
 - **Função:** tornar o primeiro contato fácil.
-- **Seções:** canais (WhatsApp, telefone, e-mail, endereço, horário, redes) · formulário que monta a mensagem e abre o WhatsApp.
+- **Seções:** canais (WhatsApp, telefone, e-mail, endereço, horário, redes) · formulário Solicitar consulta, que monta o pedido e abre o WhatsApp.
 - **Informação que deve aparecer:** todos os canais oficiais e o horário.
 - **Ação esperada:** enviar a mensagem pelo WhatsApp.
+
+### 5. Artigos (`/artigos`)
+
+- **Função:** mostrar que o escritório publica textos no blog oficial.
+- **Seções:** introdução · lista dos quatro artigos publicados (título, data e link) · chamada para solicitar consulta.
+- **Informação que deve aparecer:** título e data de cada artigo, com link para o texto no site oficial.
+- **Ação esperada:** ler um artigo no site oficial ou solicitar consulta.
 
 ### Páginas de apoio
 
@@ -64,7 +72,7 @@ Rodapé (todas as páginas): logo e razão social, páginas, contato e horário,
 
 | De | Para | Como |
 |---|---|---|
-| Qualquer página | Início, Áreas, Escritório, Contato | cabeçalho e rodapé |
+| Qualquer página | Início, Áreas, Escritório, Artigos, Contato | cabeçalho e rodapé |
 | Qualquer página | WhatsApp | botão do cabeçalho |
 | Início | WhatsApp, Escritório, Áreas, Contato, Mapa | botões do ato 1 do trilho, seta em círculo do ato 2, índice de áreas e botões das seções |
 | Áreas | Contato | botão no fim da página |

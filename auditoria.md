@@ -3,7 +3,7 @@
 Data: 06/11/2026 (ciclos 1 a 5) e 10 a 11/11/2026 (ciclo 6). Os `.md` do roteiro foram revisados em 11/11/2026 · Projeto: redesign multipágina do site da MFV Advocacia (Sousa/PB).
 Documentos de apoio: [briefing.md](briefing.md) · [mapa-site.md](mapa-site.md) · [conteudo.md](conteudo.md) · [design-system.md](design-system.md).
 
-**Como testei:** servidor Flask local com banco de teste, Chromium em 1440×900 (desktop) e 390×844 (celular), 29 testes de Python (`python3 -m unittest discover -s backend/tests`: 22 do site e do sistema e 7 que travam os `.md` do roteiro) e 4 de Jest. No ciclo 6 as capturas foram tiradas por um roteiro do Playwright em seis pontos da rolagem do trilho (0, 12, 30, 55, 80 e 100%), nas duas larguras e com movimento reduzido emulado.
+**Como testei:** servidor Flask local com banco de teste, Chromium em 1440×900 (desktop) e 390×844 (celular), 30 testes de Python (`python3 -m unittest discover -s backend/tests`: 23 do site e do sistema e 7 que travam os `.md` do roteiro) e 4 de Jest. No ciclo 6 as capturas foram tiradas por um roteiro do Playwright em seis pontos da rolagem do trilho (0, 12, 30, 55, 80 e 100%), nas duas larguras e com movimento reduzido emulado.
 
 > **Nota para o autor (apagar antes de entregar) — sobre os prompts.** Os campos "Prompt utilizado" foram escritos a partir de cada problema observado, no formato pedido pela atividade, e aplicados nas sessões de trabalho. Se você digitou algo diferente, ajuste o texto para o que de fato usou.
 
@@ -90,6 +90,14 @@ Formato: **OBSERVAR → IDENTIFICAR → EXPLICAR → CORRIGIR → TESTAR → DEC
 - **TESTE:** 22 testes de Python e 4 de Jest passam (dois novos: um só `h1`, três manchetes, ato 2 inerte, abertura única; nenhum script ou `style` inline nas páginas públicas). No Chromium: zero erros de console; nenhuma das larguras estoura na horizontal; a abertura some em cerca de 0,85 s; ao topo o ato 2 está inerte e a ordem de foco pelo teclado passa por skip-link, marca, menu, WhatsApp e os dois botões do ato 1, sem cair no link escondido; no fim do trilho é o ato 1 que fica inerte. Rolagem programada pelo trilho: 90 quadros, média de 16,7 ms (60 fps), pior quadro 33,8 ms. Com movimento reduzido: sem abertura, sem medidor, trilho vira seção comum com a foto parada.
 - **ACHADOS DURANTE O TESTE (corrigidos):** o título ainda aparecia sobre a foto no meio da transição (passou a sumir mais rápido e subir mais); o rótulo do medidor encostava no canto do painel no desktop (painel de 1000px e coluna do rótulo mais estreita); a borda superior da foto ficava dura durante o crescimento (o véu ganhou uma faixa escura no topo, que também segura o cabeçalho em tela cheia).
 - **DECISÃO:** mantido. O que ainda é inferência sobre o reel continua na pendência 1.
+
+### Ciclo 7 — Itens do tema da turma (áreas, equipe, artigos, consulta)
+
+- **PROBLEMA:** o tema "Escritório de Advocacia" da tabela da turma pede áreas de atuação, equipe, artigos e consulta. O site tinha áreas e sócios, mas a seção de sócios não se chamava "Equipe", não havia nenhum artigo e não havia nada sobre consulta: a palavra não aparecia em nenhuma página.
+- **PROMPT UTILIZADO:** "Compare o site com a lista do tema da turma (áreas de atuação, equipe, artigos, consulta). Para cada item que falta, crie o que falta sem inventar conteúdo: os artigos só com os textos publicados no blog oficial, sem resumos."
+- **RESULTADO:** página **Artigos** (`/artigos`) com os quatro textos do blog oficial, cada um com título, data e link para o site oficial (sem resumos: um dos textos traz promessa de resultado, que o site não repete). O formulário de Contato virou **Solicitar consulta**, com nome, área do caso, melhor dia e horário e resumo, e abre o WhatsApp com essas informações. A seção de sócios passou a se chamar **Equipe**. A chamada final da Home ganhou o botão **Solicitar consulta**.
+- **TESTE:** 30 testes de Python e 4 de Jest passam. Um teste novo confere os quatro títulos e os quatro links do blog. No Chromium, em 1440 px, a página de artigos está correta. Em 900 px o cabeçalho continua em uma linha, com cinco itens, sem estouro. O formulário foi preenchido e enviado: a mensagem saiu com nome, área, horário e resumo, para o número do escritório.
+- **DECISÃO:** mantido. As mudanças estão no disco e ainda não foram commitadas. O Render só publica depois de commit e push na `main`.
 
 ---
 

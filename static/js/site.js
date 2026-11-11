@@ -344,8 +344,12 @@
       const dados = new FormData(formulario);
       const nome = String(dados.get("nome") || "").trim();
       const assunto = String(dados.get("assunto") || "").trim();
+      const horario = String(dados.get("horario") || "").trim();
       const mensagem = String(dados.get("text") || "").trim();
-      const saudacao = `Olá! Meu nome é ${nome}.` + (assunto ? ` Assunto: ${assunto}.` : "");
+      const partes = [`Olá! Meu nome é ${nome}.`];
+      if (assunto) partes.push(`Área do caso: ${assunto}.`);
+      if (horario) partes.push(`Melhor dia e horário: ${horario}.`);
+      const saudacao = partes.join(" ");
       const url = `${formulario.dataset.whatsapp}&text=${encodeURIComponent(`${saudacao}\n\n${mensagem}`)}`;
       window.open(url, "_blank", "noopener");
     });

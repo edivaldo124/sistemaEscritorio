@@ -53,26 +53,30 @@
                 </div>
             </dl>
 
-            <form class="formulario-contato escuro" method="get" action="https://api.whatsapp.com/send/" target="_blank"
+            <form class="formulario-contato escuro" id="consulta" method="get" action="https://api.whatsapp.com/send/" target="_blank"
                   data-form-whatsapp data-whatsapp="{{ escritorio.contatos.whatsappUrl }}">
-                <h2>Envie uma mensagem pelo WhatsApp</h2>
-                <p>Preencha os campos e abra a conversa com o texto pronto. O que você digita não fica guardado neste site.</p>
+                <h2>Solicitar consulta</h2>
+                <p>Conte o essencial do seu caso e abra a conversa no WhatsApp com o pedido pronto. O que você digita não fica guardado neste site.</p>
                 <input type="hidden" name="phone" value="{{ telefone_link | replace('+', '') }}">
                 <label class="campo">
                     <span>Seu nome</span>
                     <input type="text" name="nome" autocomplete="name" required>
                 </label>
                 <label class="campo">
-                    <span>Assunto</span>
+                    <span>Área do seu caso</span>
                     <select name="assunto">
-                        <option value="">Prefiro explicar na mensagem</option>
+                        <option value="">Ainda não sei: explico no resumo</option>
                         {% for area in areas %}
                         <option value="{{ area.titulo }}">{{ area.titulo }}</option>
                         {% endfor %}
                     </select>
                 </label>
                 <label class="campo">
-                    <span>Mensagem</span>
+                    <span>Melhor dia e horário</span>
+                    <input type="text" name="horario" autocomplete="off" placeholder="Ex.: quinta-feira, pela manhã">
+                </label>
+                <label class="campo">
+                    <span>Resumo do caso</span>
                     <textarea name="text" required></textarea>
                 </label>
                 <button class="botao botao--primario botao--bloco" type="submit">Abrir conversa no WhatsApp</button>

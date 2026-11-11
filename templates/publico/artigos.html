@@ -1,0 +1,44 @@
+{% extends "layouts/publico.html" %}
+{% block titulo %}Artigos — MFV Advocacia | Sousa, Paraíba{% endblock %}
+{% block descricao %}Artigos publicados no blog do escritório MFV Advocacia, em Sousa, Paraíba.{% endblock %}
+{% block conteudo %}
+<section class="palco palco--pagina escuro" data-palco aria-labelledby="titulo-pagina">
+    <div class="palco__fundo" aria-hidden="true"></div>
+    <div class="contentor">
+        <div class="palco__cena" data-cena>
+            <div class="palco__monograma monograma" aria-hidden="true"></div>
+            <p class="rotulo">Artigos</p>
+            <h1 class="palco__titulo" id="titulo-pagina"><span class="palco__linha"><span>Artigos do escritório</span></span></h1>
+            <p class="palco__sub">Textos publicados no blog do escritório. Cada título abre o artigo no site oficial, em outra aba.</p>
+        </div>
+    </div>
+</section>
+
+<section class="secao secao--papel" aria-label="Lista de artigos">
+    <div class="contentor">
+        <div class="lista-areas">
+            {% for artigo in artigos %}
+            <article class="area">
+                <h2 class="area__nome">{{ artigo.titulo }}</h2>
+                <div>
+                    <p class="area__texto">Publicado em {{ artigo.data }}.</p>
+                    <a class="link-seta" href="{{ artigo.url }}" target="_blank" rel="noopener noreferrer" aria-label="Ler no site oficial: {{ artigo.titulo }} (abre em outra aba)">Ler no site oficial</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="secao escuro" aria-labelledby="consulta-titulo">
+    <div class="contentor">
+        <div class="encerramento">
+            <div class="encerramento__monograma monograma" aria-hidden="true"></div>
+            <h2 class="encerramento__titulo" id="consulta-titulo">Quer conversar sobre o seu caso?</h2>
+            <div class="acoes-linha">
+                <a class="botao botao--primario" href="{{ url_for('publico.contato') }}#consulta">Solicitar consulta</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -22,6 +22,7 @@ NAVEGACAO_PUBLICA: List[Tuple[str, str]] = [
     ("publico.inicio", "Início"),
     ("publico.areas", "Áreas de atuação"),
     ("publico.escritorio", "O escritório"),
+    ("publico.artigos", "Artigos"),
     ("publico.contato", "Contato"),
 ]
 
@@ -120,6 +121,33 @@ FRENTES_DE_CONTEUDO: List[Dict[str, str]] = [
         "titulo": "MFV Cast",
         "texto": "Podcast do escritório.",
         "url": "https://mfv.adv.br/mfv-cast/",
+    },
+]
+
+
+# Artigos publicados no blog oficial (https://mfv.adv.br/blog/). Títulos, datas e links conferidos em
+# 11/11/2026 e copiados como o blog os publica (inclusive sem acento em "atuacao"). Sem resumos: o texto
+# de alguns artigos traz promessas de resultado, que o site não repete (Provimento 205/2021 da OAB).
+ARTIGOS_BLOG: List[Dict[str, str]] = [
+    {
+        "titulo": "Compliance empresarial: por onde começar",
+        "data": "1 de março de 2026",
+        "url": "https://mfv.adv.br/blog/compliance-empresarial-por-onde-comecar",
+    },
+    {
+        "titulo": "Agenda de eventos 2026: atualização e mercado",
+        "data": "10 de fevereiro de 2026",
+        "url": "https://mfv.adv.br/blog/agenda-eventos-2026",
+    },
+    {
+        "titulo": "Contratos essenciais para empresas: o básico bem feito",
+        "data": "20 de janeiro de 2026",
+        "url": "https://mfv.adv.br/blog/contratos-essenciais-para-empresas",
+    },
+    {
+        "titulo": "MFV celebra 10 anos de atuacao",
+        "data": "1 de agosto de 2025",
+        "url": "https://mfv.adv.br/blog/mfv-10-anos",
     },
 ]
 

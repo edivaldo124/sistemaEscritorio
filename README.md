@@ -2,7 +2,7 @@
 
 Projeto da atividade *Do briefing ao site multipágina com IA* (Desenvolvimento de Aplicações Web). Reúne:
 
-1. **Site público** (Flask + Jinja, CSS e JavaScript sem dependências): Início, Áreas de atuação, O escritório e Contato.
+1. **Site público** (Flask + Jinja, CSS e JavaScript sem dependências): Início, Áreas de atuação, O escritório, Artigos e Contato.
 2. **Sistema interno de gestão** (clientes, processos, agenda, documentos, relatórios, mural), atrás da "Área restrita da equipe".
 
 O negócio é o escritório real **Melo Fernandes & Vasconcelos Advocacia (MFV)**. Este **não é o site oficial**: o oficial é <https://mfv.adv.br>. Logotipo, fotos e vídeos pertencem ao escritório.
@@ -22,7 +22,7 @@ O negócio é o escritório real **Melo Fernandes & Vasconcelos Advocacia (MFV)*
 | Etapa | O roteiro pede | Onde está | Situação |
 |---|---|---|---|
 | 1 e 2 | `briefing.md` com público-alvo, problema, objetivo, proposta de valor, diferenciais, CTA, personalidade e materiais | `briefing.md` | Cumprido |
-| 3 | `mapa-site.md` com pelo menos 4 páginas e 4 campos por página | `mapa-site.md` | Cumprido: 4 páginas, mais 4 de apoio |
+| 3 | `mapa-site.md` com pelo menos 4 páginas e 4 campos por página | `mapa-site.md` | Cumprido: 5 páginas, mais 4 de apoio |
 | 4 | `conteudo.md` sem Lorem Ipsum e sem fatos inventados | `conteudo.md` | Cumprido, com a fonte de cada dado |
 | 5 | `design-system.md` do Refero, "não altere inicialmente" | `design-system.md` | Texto original intacto, conferido por teste. Duas extensões ao final, a pedido do autor (veja a pendência 10 da auditoria) |
 | 6 | Pasta com os quatro `.md` e uma pasta `site/` | Raiz do repositório | **Diferente:** não há pasta `site/` (veja a nota abaixo) |

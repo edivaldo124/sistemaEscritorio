@@ -29,7 +29,7 @@ RAIZ = Path(__file__).resolve().parents[2]
 
 ARQUIVOS_DO_ROTEIRO = ["briefing.md", "mapa-site.md", "conteudo.md", "design-system.md", "auditoria.md"]
 ARQUIVOS_COM_LINKS = ARQUIVOS_DO_ROTEIRO + ["README.md", "AGENTS.md"]
-PAGINAS = ["/", "/areas-de-atuacao", "/escritorio", "/contato"]
+PAGINAS = ["/", "/areas-de-atuacao", "/escritorio", "/artigos", "/contato"]
 ROTAS_NO_MAPA = PAGINAS + ["/termos", "/privacidade", "/login"]
 PASTAS_IGNORADAS = {
     "node_modules", ".git", ".next", ".agents", ".agent", ".claude", ".playwright-mcp", "__pycache__", ".venv", "venv",

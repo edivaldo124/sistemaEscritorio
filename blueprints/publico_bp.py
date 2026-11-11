@@ -1,7 +1,7 @@
 """
 Blueprint público: site da MFV Advocacia (Sousa - PB).
 
-Páginas: Início, Áreas de atuação, O escritório, Contato, Termos e Privacidade.
+Páginas: Início, Áreas de atuação, O escritório, Artigos, Contato, Termos e Privacidade.
 Não consulta o banco de dados: o conteúdo vem de config.FIRM_DATA e de servicos/conteudo_publico.py.
 """
 
@@ -12,6 +12,7 @@ from typing import Any, Dict
 from flask import Blueprint, render_template
 
 from servicos.conteudo_publico import (
+    ARTIGOS_BLOG,
     AREAS_DE_ATUACAO,
     FRENTES_DE_CONTEUDO,
     MAIS_DE_N_AREAS,
@@ -59,6 +60,11 @@ def pagina_escritorio() -> Any:
         frentes=FRENTES_DE_CONTEUDO,
         anos_atuacao=anos_de_atuacao(),
     )
+
+
+@publico_bp.get("/artigos")
+def artigos() -> Any:
+    return render_template("publico/artigos.html", artigos=ARTIGOS_BLOG)
 
 
 @publico_bp.get("/contato")

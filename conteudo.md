@@ -18,7 +18,7 @@
 
 | Elemento | Texto | CTA / destino | Fonte |
 |---|---|---|---|
-| Menu | Início · Áreas de atuação · O escritório · Contato | Cada item leva à sua página | Projeto |
+| Menu | Início · Áreas de atuação · O escritório · Artigos · Contato | Cada item leva à sua página | Projeto |
 | Botão do cabeçalho | WhatsApp | Abre o WhatsApp do escritório | SO |
 | Botão do menu no celular | Menu / Fechar | Abre e fecha o menu | Projeto |
 | Rodapé: títulos | Páginas · Contato · Mais | | Projeto |
@@ -49,7 +49,7 @@
 | Onde estamos | Título **No centro de Sousa** · Rua Lafaiete Píres Ferreira, nº 35, Centro — Sousa/PB, CEP 58800-510. · Atendimento por telefone e presencial: segunda a sexta-feira, das 07h30 às 12h00 e das 13h30 às 18h00. | SO; GM |
 | Onde estamos: CTAs | **Ver no mapa** (Google Maps) · **Todos os contatos** (vai a Contato) | Projeto |
 | Onde estamos: foto | Fachada do escritório, com o letreiro dourado sobre mármore escuro | SO (`estrutura.png`, recortada) |
-| Chamada final | **Fale com o escritório.** · CTAs **Falar pelo WhatsApp** e **Ver outros canais** (vai a Contato) | Projeto |
+| Chamada final | **Fale com o escritório.** · CTAs **Falar pelo WhatsApp** e **Solicitar consulta** (vai ao formulário de Contato) | Projeto |
 
 ## 2. Áreas de atuação (`/areas-de-atuacao`)
 
@@ -83,7 +83,7 @@ Os **nomes** das oito áreas são os que o SO destaca. As **definições** foram
 | Subtítulo | Há 11 anos, a MFV Advocacia atende empresas e pessoas físicas na Paraíba. | SO; cálculo |
 | História | Título **A história do escritório** · O escritório foi fundado por Bárbara de Melo Fernandes e Higor Vasconcelos de Almeida, sócios desde a origem. A parceria dos dois vem do ensino médio e se consolidou na advocacia. · A sede fica em Sousa desde 2015. A principal frente é a assessoria a empresas, em diferentes estágios do negócio. Pessoas físicas também são atendidas, tanto na orientação quanto nas ações judiciais. | SO |
 | História: foto | Retrato de duas pessoas da equipe diante de uma parede de mármore iluminada. Legenda: Foto da seção de história do site oficial do escritório. | SO (`DSC_9192.jpg`) |
-| Sócios | Rótulo Quem fundou · título **Sócios-fundadores** · Dra. Bárbara de Melo Fernandes Vasconcelos, OAB/PB 19.571, sócia-fundadora · Dr. Higor Vasconcelos de Almeida, OAB/PB 19.503, sócio-fundador | CNPJ (administradores) e OAB (inscrições) |
+| Equipe | Rótulo Sócios-fundadores · título **Equipe** · Dra. Bárbara de Melo Fernandes Vasconcelos, OAB/PB 19.571, sócia-fundadora · Dr. Higor Vasconcelos de Almeida, OAB/PB 19.503, sócio-fundador | CNPJ (administradores) e OAB (inscrições) |
 | Eventos e conteúdo | Título **Eventos e conteúdo** · O escritório publica conteúdo e promove encontros. Os links abrem o site oficial. · **Palestras e workshops**: O escritório promove encontros voltados ao público empresarial. · **Blog**: Notícias publicadas pelo escritório no site oficial. · **MFV Cast**: Podcast do escritório. | SO |
 | Eventos: CTA | **Abrir no site oficial** (um link para cada item, abre em outra aba) | SO |
 | Fecho | **Fale com a MFV.** · O site oficial indica como parceiro o escritório MZA — Mouzalas Azevedo. | SO |
@@ -106,12 +106,32 @@ Os **nomes** das oito áreas são os que o SO destaca. As **definições** foram
 
 | Formulário | Texto no site |
 |---|---|
-| Título | **Envie uma mensagem pelo WhatsApp** |
-| Explicação | Preencha os campos e abra a conversa com o texto pronto. O que você digita não fica guardado neste site. |
-| Campos | Seu nome · Assunto (Prefiro explicar na mensagem, ou uma das oito áreas) · Mensagem |
+| Título | **Solicitar consulta** |
+| Explicação | Conte o essencial do seu caso e abra a conversa no WhatsApp com o pedido pronto. O que você digita não fica guardado neste site. |
+| Campos | Seu nome · Área do seu caso (Ainda não sei: explico no resumo, ou uma das oito áreas) · Melhor dia e horário · Resumo do caso |
 | CTA | **Abrir conversa no WhatsApp** |
 
 O formulário não envia dados a este site: ele monta o texto e abre o WhatsApp com a conversa pronta.
+
+## 5. Artigos (`/artigos`)
+
+| Seção | Texto no site | Fonte |
+|---|---|---|
+| Rótulo e título | Artigos · **Artigos do escritório** | Projeto |
+| Introdução | Textos publicados no blog do escritório. Cada título abre o artigo no site oficial, em outra aba. | SO (blog) |
+
+| Artigo (título como publicado) | Data | Link | Fonte |
+|---|---|---|---|
+| **Compliance empresarial: por onde começar** | 1 de março de 2026 | Ler no site oficial | SO (`/blog/compliance-empresarial-por-onde-comecar`) |
+| **Agenda de eventos 2026: atualização e mercado** | 10 de fevereiro de 2026 | Ler no site oficial | SO (`/blog/agenda-eventos-2026`) |
+| **Contratos essenciais para empresas: o básico bem feito** | 20 de janeiro de 2026 | Ler no site oficial | SO (`/blog/contratos-essenciais-para-empresas`) |
+| **MFV celebra 10 anos de atuacao** | 1 de agosto de 2025 | Ler no site oficial | SO (`/blog/mfv-10-anos`) |
+
+Os títulos são copiados como o blog os publica, inclusive sem acento em "atuacao". Não há resumos: o texto de alguns artigos traz promessas de resultado, e o site não repete isso (Provimento 205/2021).
+
+| Chamada final | Texto no site | CTA | Fonte |
+|---|---|---|---|
+| **Quer conversar sobre o seu caso?** | Quer conversar sobre o seu caso? | **Solicitar consulta** (vai ao formulário de Contato) | Projeto |
 
 ## Páginas de apoio
 

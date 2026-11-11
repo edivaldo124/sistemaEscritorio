@@ -18,7 +18,7 @@ Este repositório contém o **site público** e o **sistema interno de gestão**
 - `comandos.py`: comandos CLI (`flask --app servidor popular-institucional`).
 - `modelos/`, `dao/`: entidades SQLAlchemy e persistência.
 - `servicos/`: autenticação, autorização, formatação, minutas, relatórios e **`conteudo_publico.py`** (navegação e textos verificados do site público).
-- `blueprints/`: rotas por domínio. `publico_bp.py` serve `/`, `/areas-de-atuacao`, `/escritorio`, `/contato`, `/termos` e `/privacidade`.
+- `blueprints/`: rotas por domínio. `publico_bp.py` serve `/`, `/areas-de-atuacao`, `/escritorio`, `/artigos`, `/contato`, `/termos` e `/privacidade`.
 - `backend/`: API REST Python (Flask + SQLAlchemy + Pydantic) e testes (`backend/tests/test_api.py`, `test_site_publico.py` e `test_roteiro_md.py`, que trava os `.md` do roteiro).
 
 ## Templates (`templates/`)
